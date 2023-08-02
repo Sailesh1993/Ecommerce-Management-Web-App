@@ -93,3 +93,4 @@ Testing should be done along the development circle, early and regularly.
 ## Testing
 
 Unit testing, and optionally integration testing, must be included for both frontend and backend code. Aim for high test coverage and ensure all major functionalities are covered.
+### Entity Relationship Diagram
