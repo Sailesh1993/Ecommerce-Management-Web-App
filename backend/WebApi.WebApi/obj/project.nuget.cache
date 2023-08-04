@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "uVvs6yKWzN/U4XI8bt7mAkZniGsLUMw6QXv6F1z7l4JZ2GiM7NGSGY4o+PkX4nvDvf4yKhiZE1J/n70ET8HDdw==",
+  "success": true,
+  "projectFilePath": "/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.WebApi/WebApi.WebApi.csproj",
+  "expectedPackageFiles": [
+    "/Users/saileshkarki/.nuget/packages/microsoft.aspnetcore.openapi/7.0.5/microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
