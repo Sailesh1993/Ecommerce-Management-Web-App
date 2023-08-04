@@ -95,3 +95,6 @@ Testing should be done along the development circle, early and regularly.
 Unit testing, and optionally integration testing, must be included for both frontend and backend code. Aim for high test coverage and ensure all major functionalities are covered.
 ### Ecommerce-Project-Design
 [Design-Ecommerce-App](https://lucid.app/lucidspark/5de551fb-af72-4962-8385-00955c1fb85a/edit?viewport_loc=-579%2C-59%2C1920%2C1368%2C0_0&invitationId=inv_4c26e2c2-99b2-40a3-83f7-d559aa0b590c)
+
+### Entity relationship Diagram
+[Database-Schema] (https://lucid.app/lucidchart/a11bb4a1-bb02-4def-ac60-6d8369d6f073/edit?viewport_loc=-2703%2C-1739%2C3286%2C1629%2C0_0&invitationId=inv_f63e8a90-761c-49ac-a934-0883cc121c72)
