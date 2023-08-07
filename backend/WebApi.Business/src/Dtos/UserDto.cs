@@ -1,21 +1,16 @@
-namespace WebApi.Domain.src.Entities
+using WebApi.Domain.src.Entities;
+
+namespace WebApi.Business.src.Dtos
 {
-    public class User: BaseEntity
+    public class UserDto
     {
         public string Username { get; set; }
-        public string Password { get; set;}
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public Role Role { get; set; }
 
         public UserContactDetails UserContactDetails { get; set; }
-        
     }
-     public enum Role
-    {
-        Admin,
-        User
-    }
+    
 }
-

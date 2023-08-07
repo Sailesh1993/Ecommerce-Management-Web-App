@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "x/uK3F1NOptdiMOSPl3xL8kGtW9+KmQL0Rdsib0QXUAi2oT5wTOXDlKFPO2fgE1eUYmu4gyZhjXAz9uhpvskcA==",
+  "dgSpecHash": "LiCwsKb85SRci7cOWk6PleIovOOTmqx/kXLMxF0B8bLAc6Ns6fO3cZlon3psbZjkEPEQoaoKegfKPwVsuEnumA==",
   "success": true,
   "projectFilePath": "/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Controller/WebApi.Controller.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/saileshkarki/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
+    "/Users/saileshkarki/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512"
+  ],
   "logs": []
 }
