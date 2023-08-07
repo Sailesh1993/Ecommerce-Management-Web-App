@@ -1,6 +1,6 @@
 namespace WebApi.Domain.src.Entities
 {
-    public class Order: BaseEntityWithId
+    public class Order: TimeStamp
     {
         public OrderStatus OrderStatus { get; set; }
         public User User { get; set; }
