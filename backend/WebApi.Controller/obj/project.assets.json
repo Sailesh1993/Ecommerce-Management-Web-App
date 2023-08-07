@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net7.0": {}
+    "net7.0": {
+      "WebApi.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "WebApi.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/WebApi.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Business.dll": {}
+        }
+      },
+      "WebApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/WebApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/WebApi.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "WebApi.Business/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Business/WebApi.Business.csproj",
+      "msbuildProject": "../WebApi.Business/WebApi.Business.csproj"
+    },
+    "WebApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../WebApi.Domain/WebApi.Domain.csproj",
+      "msbuildProject": "../WebApi.Domain/WebApi.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0": []
+    "net7.0": [
+      "WebApi.Business >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/Users/saileshkarki/.nuget/packages/": {}
@@ -31,7 +68,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/WebApi.Business.csproj": {
+              "projectPath": "/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/WebApi.Business.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
