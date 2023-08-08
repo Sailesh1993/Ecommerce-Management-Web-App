@@ -1,6 +1,6 @@
 namespace WebApi.Domain.src.Entities
 {
-    public class User: BaseEntity
+    public class User: TimeStamp
     {
         public string Username { get; set; }
         public string Password { get; set;}
