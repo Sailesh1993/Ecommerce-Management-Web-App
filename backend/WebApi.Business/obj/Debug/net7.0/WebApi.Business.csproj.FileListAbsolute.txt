@@ -1,0 +1,15 @@
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/bin/Debug/net7.0/WebApi.Business.deps.json
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/bin/Debug/net7.0/WebApi.Business.dll
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/bin/Debug/net7.0/WebApi.Business.pdb
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/bin/Debug/net7.0/WebApi.Domain.dll
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/bin/Debug/net7.0/WebApi.Domain.pdb
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.csproj.AssemblyReference.cache
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.AssemblyInfoInputs.cache
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.AssemblyInfo.cs
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.csproj.CoreCompileInputs.cache
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.csproj.CopyComplete
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.dll
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/refint/WebApi.Business.dll
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/WebApi.Business.pdb
+/Users/saileshkarki/Desktop/Integrify_Assignment/FullstackProject/fs15_Fullstack/backend/WebApi.Business/obj/Debug/net7.0/ref/WebApi.Business.dll
