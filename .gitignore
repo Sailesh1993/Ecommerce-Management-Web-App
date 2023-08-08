@@ -3,11 +3,14 @@
 # User-specific files
 backend/appsettings.json
 backend/appsettings.*.json
-backend/obj/
-backend/bin/
+backend/WebApi.Business/obj
+backend/WebApi.Business/Business
+backend/WebApi.Controller/obj
+backend/WebApi.Controller/bin
+
 
 # Visual Studio 2015/2017 cache/options directory
-.vs/
+.vscode
 
 # .NET
 project.lock.json
@@ -47,6 +50,7 @@ artifacts/
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
+.vscode
 
 # NuGet Packages
 *.nupkg

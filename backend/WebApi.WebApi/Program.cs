@@ -1,3 +1,6 @@
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options => 
+{
+    options.AddSecurityDefinition("oauth", new OpenApiSecurityScheme{
+        Description = "Bearer token authentication",
+        Name = "Authentication",
+        In = ParameterLocation.Header
+    });
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 
 //Config route
 builder.Services.Configure<RouteOptions>(options =>
