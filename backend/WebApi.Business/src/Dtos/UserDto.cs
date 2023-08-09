@@ -16,6 +16,7 @@ namespace WebApi.Business.src.Dtos
     public class UserCreateDto
     {
         public string Username { get; set; }
+        public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
@@ -29,5 +30,11 @@ namespace WebApi.Business.src.Dtos
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public UserContactDetails UserContactDetails { get; set; }
+    }
+
+    public class UserCredentialsDto
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
