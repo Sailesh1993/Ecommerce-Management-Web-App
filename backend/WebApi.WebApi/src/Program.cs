@@ -1,9 +1,27 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using WebApi.Business.src.Abstractions;
+using WebApi.Business.src.Implementations;
+using WebApi.Domain.src.Abstractions;
+using WebApi.WebApi.src.Database;
+using WebApi.WebApi.src.RepoImplementations;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add AutoMapper DI
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+// Add db context
+builder.Services.AddDbContext<DatabaseContext>();
+
+// Add services DI
+builder.Services
+.AddScoped<IUserRepo, UserRepo>()
+.AddScoped<IUserService, UserService>()
+;
 
 // Add services to the container.
 
@@ -34,7 +52,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         ValidateIssuer = true,
         ValidIssuer = "ecommerce-backend",
-        IssuerSigningKey = new JsonWebKey("my-secret-key"),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key")),
         ValidateIssuerSigningKey = true
     };
     
