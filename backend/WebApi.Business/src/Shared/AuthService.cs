@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Dtos;
@@ -17,7 +18,7 @@ namespace WebApi.Business.src.Shared
         }
         public async Task<string> VerifyCredentials(UserCredentialsDto credentials)
         {
-            var foundUserByEmail = await _userRepo.FindOneByEmail(credentials.Email);
+            var foundUserByEmail = await _userRepo.FindOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
             var isAuthenticated = PasswordService.VerifyPassword(credentials.Password, foundUserByEmail.Password, foundUserByEmail.Salt);
             if(!isAuthenticated)
             {
@@ -32,7 +33,7 @@ namespace WebApi.Business.src.Shared
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
-            var securityKey = new JsonWebKey("my-secret-key");
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key-is-my-goal-to-secure-everything"));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             var securityTokenDescriptor = new SecurityTokenDescriptor{
                 Issuer = "ecommerce-backend",
@@ -42,7 +43,7 @@ namespace WebApi.Business.src.Shared
             };
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-            return token.ToString();
+            return jwtSecurityTokenHandler.WriteToken(token);
         }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Implementations;
+using WebApi.Business.src.Shared;
 using WebApi.Domain.src.Abstractions;
 using WebApi.WebApi.src.Database;
 using WebApi.WebApi.src.RepoImplementations;
@@ -21,7 +22,7 @@ builder.Services.AddDbContext<DatabaseContext>();
 builder.Services
 .AddScoped<IUserRepo, UserRepo>()
 .AddScoped<IUserService, UserService>()
-;
+.AddScoped<IAuthService, AuthService>();
 
 // Add services to the container.
 
@@ -30,7 +31,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => 
 {
-    options.AddSecurityDefinition("oauth", new OpenApiSecurityScheme{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme{
         Description = "Bearer token authentication",
         Name = "Authentication",
         In = ParameterLocation.Header
@@ -52,7 +53,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         ValidateIssuer = true,
         ValidIssuer = "ecommerce-backend",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key")),
+        ValidateAudience = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key-is-my-goal-to-secure-everything")),
         ValidateIssuerSigningKey = true
     };
     

@@ -21,15 +21,23 @@ namespace WebApi.WebApi.src.Database
             _config = config;
         }
 
+        static DatabaseContext()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Default"));
+            builder.MapEnum<Role>();
+            optionsBuilder.AddInterceptors(new TimeStampInterceptor());
             optionsBuilder.UseNpgsql(builder.Build()).UseSnakeCaseNamingConvention();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasPostgresEnum<Role>();
+            modelBuilder.Entity<User>().HasIndex(u=>u.Email).IsUnique();
         }
     }
 }

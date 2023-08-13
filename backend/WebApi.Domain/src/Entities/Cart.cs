@@ -8,6 +8,7 @@ namespace WebApi.Domain.src.Entities
         public Guid UserId { get; set; }
         public Decimal Total { get; set; }
         public DateTime ExpiresAt { get; set; }
+        
         public User User { get; set; }
         public List<CartItem> CartItems { get; set; }
     }

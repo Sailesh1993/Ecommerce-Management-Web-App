@@ -1,5 +1,5 @@
 ### Ignore unnecessary files in backend
-
+.vscode/
 # User-specific files
 backend/appsettings.json
 backend/appsettings.*.json

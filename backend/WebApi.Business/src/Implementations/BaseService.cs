@@ -15,7 +15,7 @@ namespace WebApi.Business.src.Implementations
             _baseRepo = baseRepo;
             _mapper = mapper;
         }
-        public async Task<bool> DeleteOneByID(string id)
+        public async Task<bool> DeleteOneByID(Guid id)
         {
             var foundItem = await _baseRepo.GetOneById(id);
             if(foundItem is null)
@@ -31,12 +31,12 @@ namespace WebApi.Business.src.Implementations
             return _mapper.Map<IEnumerable<TReadDto>>(await _baseRepo.GetAll(queryOptions));
         }
 
-        public async Task<TReadDto> GetOneById(string id)
+        public async Task<TReadDto> GetOneById(Guid id)
         {
             return _mapper.Map<TReadDto>(_baseRepo.GetOneById(id));
         }
 
-        public async Task<TReadDto> UpdateOneById(string id, TUpdateDto updated)
+        public async Task<TReadDto> UpdateOneById(Guid id, TUpdateDto updated)
         {
             var foundItem = await _baseRepo.GetOneById(id);
             if(foundItem is null)
@@ -44,7 +44,7 @@ namespace WebApi.Business.src.Implementations
                 await _baseRepo.DeleteOneByID(foundItem);
                 throw new Exception("Item not found");
             }
-            var updatedEntity = _baseRepo.UpdateOneById(foundItem, _mapper.Map<T>(updated));
+            var updatedEntity = _baseRepo.UpdateOneById(_mapper.Map<T>(updated));
             return _mapper.Map<TReadDto>(updatedEntity);
         }
 

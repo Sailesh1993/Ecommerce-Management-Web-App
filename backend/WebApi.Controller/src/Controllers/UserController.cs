@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
@@ -11,7 +7,6 @@ using WebApi.Domain.src.Shared;
 
 namespace WebApi.Controller.src.Controllers
 {
-    [Authorize]
     public class UserController: BaseController<User, UserReadDto, UserCreateDto, UserUpdateDto>
     {
         private readonly IUserService _userService;
@@ -19,9 +14,15 @@ namespace WebApi.Controller.src.Controllers
         {
             _userService = baseService;   
         }
+
+        [Authorize]
+        public override async Task<ActionResult<IEnumerable<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+        {
+            return Ok(await base.GetAll(queryOptions));
+        }
         
         [AllowAnonymous]
-        public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] string id)
+        public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] Guid id)
         {
             return Ok(await base.GetOneById(id));
         }
