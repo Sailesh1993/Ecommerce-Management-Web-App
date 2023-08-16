@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using AutoMapper;
 using WebApi.Business.src.Abstractions;
 using WebApi.Domain.src.Abstractions;
@@ -18,7 +19,7 @@ namespace WebApi.Business.src.Implementations
         public async Task<bool> DeleteOneByID(Guid id)
         {
             var foundItem = await _baseRepo.GetOneById(id);
-            if(foundItem is null)
+            if(foundItem is not null)
             {
                 _baseRepo.DeleteOneByID(foundItem);
                 return true;
@@ -26,9 +27,11 @@ namespace WebApi.Business.src.Implementations
             return false;
         }
 
-        public async Task<IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions)
+        public async Task<IList<TReadDto>> GetAll(QueryOptions queryOptions)
         {
-            return _mapper.Map<IEnumerable<TReadDto>>(await _baseRepo.GetAll(queryOptions));
+            var allUsers= await _baseRepo.GetAll(queryOptions);
+            var mappedUSers =   _mapper.Map<IList<TReadDto>>(allUsers);
+            return mappedUSers;
         }
 
         public async Task<TReadDto> GetOneById(Guid id)

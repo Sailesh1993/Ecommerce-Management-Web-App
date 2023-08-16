@@ -10,7 +10,7 @@ namespace WebApi.Business.src.Dtos
         public string Avatar { get; set; }
         public Role Role { get; set; }
 
-       /*  public UserContactDetails UserContactDetails { get; set; } */
+        public UserContactDetails UserContactDetails { get; set; }
     }
     
     public class UserCreateDto
@@ -22,7 +22,7 @@ namespace WebApi.Business.src.Dtos
         public string LastName { get; set; }
         public string Avatar { get; set; }
 
-       /*  public UserContactDetails UserContactDetails { get; set; } */
+        public UserContactDetails UserContactDetails { get; set; }
     }
     public class UserUpdateDto
     {
@@ -30,7 +30,7 @@ namespace WebApi.Business.src.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
-        /* public UserContactDetails UserContactDetails { get; set; } */
+        public UserContactDetails UserContactDetails { get; set; }
     }
 
     public class UserCredentialsDto

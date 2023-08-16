@@ -16,9 +16,10 @@ namespace WebApi.Controller.src.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<TReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+        public virtual async Task<ActionResult<IList<TReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {
-            return Ok(await _baseService.GetAll(queryOptions));
+            var listusers= await _baseService.GetAll(queryOptions);
+            return Ok(listusers);
         }
 
         [HttpGet("{id:Guid}")]
