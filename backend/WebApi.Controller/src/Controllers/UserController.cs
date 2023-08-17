@@ -15,16 +15,16 @@ namespace WebApi.Controller.src.Controllers
             _userService = baseService;   
         }
 
-        // [AllowAnonymous]
-        // public override async Task<ActionResult<IList<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
-        // {   var userlist = await base.GetAll(queryOptions);
-        //     return Ok(userlist);
-        // }
+        [AllowAnonymous]
+        public override async Task<ActionResult<IEnumerable<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+        {    return Ok(await _userService.GetAll(queryOptions));
+             
+        }
         
         [AllowAnonymous]
         public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] Guid id)
         {
-            return Ok(await base.GetOneById(id));
+            return Ok(await _userService.GetOneById(id));
         }
     }
 }

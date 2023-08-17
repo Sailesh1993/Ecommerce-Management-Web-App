@@ -16,17 +16,17 @@ namespace WebApi.Controller.src.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<IList<TReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
+        public virtual async Task<ActionResult<IEnumerable<TReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {
-            var listusers= await _baseService.GetAll(queryOptions);
-            return Ok(listusers);
+            var list= (await _baseService.GetAll(queryOptions)).ToArray();
+            return Ok(list);
         }
 
         [HttpGet("{id:Guid}")]
         public virtual async Task<ActionResult<TReadDto>> GetOneById([FromRoute] Guid id)
         {
-
-            return Ok(await _baseService.GetOneById(id));
+            var obj = await _baseService.GetOneById(id);
+            return Ok(obj);
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace WebApi.Controller.src.Controllers
         [HttpPatch("{id}")]
         public virtual async Task<ActionResult<TReadDto>> UpdateOneById([FromRoute] Guid id, [FromForm] TUpdateDto update)
         {
-            var updatedObject = _baseService.UpdateOneById(id, update);
+            var updatedObject = await _baseService.UpdateOneById(id, update);
             return Ok(updatedObject);
         }
 

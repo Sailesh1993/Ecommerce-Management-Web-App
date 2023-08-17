@@ -9,9 +9,4 @@ namespace WebApi.Domain.src.Abstractions
         Task<User> UpdatePassword(User user);
         Task<User?> FindOneByEmail(string email);
     }
-
-    public interface IUserContactDetailsRepo : IBaseRepo<UserContactDetails>
-    {
-      
-    }
 }

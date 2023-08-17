@@ -2,15 +2,19 @@ using WebApi.Domain.src.Entities;
 
 namespace WebApi.Business.src.Dtos
 {
-    public class UserReadDto
+    public class UserReadDto 
     {
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public Role Role { get; set; }
-
-        public UserContactDetails UserContactDetails { get; set; }
+        public string Address { get; set; }
+        public  string City { get; set; }
+        public string PostalCode { get; set; } 
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
+        
     }
     
     public class UserCreateDto
@@ -21,16 +25,24 @@ namespace WebApi.Business.src.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
+        public string Address { get; set; }
+        public  string City { get; set; }
+        public string PostalCode { get; set; } 
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public UserContactDetails UserContactDetails { get; set; }
     }
     public class UserUpdateDto
     {
-        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
-        public UserContactDetails UserContactDetails { get; set; }
+        public string Address { get; set; }
+        public  string City { get; set; }
+        public string PostalCode { get; set; } 
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
+
     }
 
     public class UserCredentialsDto

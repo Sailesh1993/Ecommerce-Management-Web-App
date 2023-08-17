@@ -27,27 +27,26 @@ namespace WebApi.Business.src.Implementations
             return false;
         }
 
-        public async Task<IList<TReadDto>> GetAll(QueryOptions queryOptions)
+        public async Task<IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions)
         {
-            var allUsers= await _baseRepo.GetAll(queryOptions);
-            var mappedUSers =   _mapper.Map<IList<TReadDto>>(allUsers);
-            return mappedUSers;
+            var allList= await _baseRepo.GetAll(queryOptions);
+            var mappedList =   _mapper.Map<IEnumerable<TReadDto>>(allList);
+            return mappedList;
         }
 
-        public async Task<TReadDto> GetOneById(Guid id)
+        public virtual async Task<TReadDto> GetOneById(Guid id)
         {
-            return _mapper.Map<TReadDto>(_baseRepo.GetOneById(id));
+            return _mapper.Map<TReadDto>(await _baseRepo.GetOneById(id));
         }
 
-        public async Task<TReadDto> UpdateOneById(Guid id, TUpdateDto updated)
+        public virtual async Task<TReadDto> UpdateOneById(Guid id, TUpdateDto updated)
         {
-            var foundItem = await _baseRepo.GetOneById(id);
-            if(foundItem is null)
-            {
-                await _baseRepo.DeleteOneByID(foundItem);
-                throw new Exception("Item not found");
-            }
-            var updatedEntity = _baseRepo.UpdateOneById(_mapper.Map<T>(updated));
+            // var foundItem = await _baseRepo.GetOneById(id);
+            // if(foundItem is null)
+            // {
+            //     throw new Exception("Item not found");
+            // }
+            var updatedEntity = await _baseRepo.UpdateOneById(_mapper.Map<T>(updated));
             return _mapper.Map<TReadDto>(updatedEntity);
         }
 

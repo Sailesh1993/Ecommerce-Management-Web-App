@@ -4,7 +4,7 @@ namespace WebApi.Business.src.Abstractions
 {
     public interface IBaseService<T,TReadDto, TCreateDto, TUpdateDto>
     {
-        Task <IList<TReadDto>> GetAll(QueryOptions queryOptions); 
+        Task <IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions); 
         Task <TReadDto> GetOneById(Guid id);
         Task <TReadDto> UpdateOneById(Guid id, TUpdateDto updated);
         Task <bool> DeleteOneByID(Guid id);
