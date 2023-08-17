@@ -15,6 +15,12 @@ namespace WebApi.WebApi.src.Configuration
             CreateMap<Product, ProductReadDto>();
             CreateMap<ProductUpdateDto, Product>();
             CreateMap<ProductCreateDto, Product>();
+
+
+            CreateMap<Category, CategoryReadDto>();
+            CreateMap<CategoryReadDto, Category>();
+            CreateMap<CategoryUpdateDto, Category>();
+            CreateMap<CategoryCreateDto, Category>();
         }
     }
 }

@@ -8,7 +8,6 @@ namespace WebApi.WebApi.src.Database
     {
         private readonly IConfiguration _config;
         public DbSet<User> Users { get; set; }
-        public DbSet<UserContactDetails> UserContactDetails { get; set; }
         public DbSet<Product> Products {get; set;}
         public DbSet<Order> Orders {get; set; }
         public DbSet<OrderProduct> OrderProducts {get; set;}
@@ -30,6 +29,7 @@ namespace WebApi.WebApi.src.Database
         {
             var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("Default"));
             builder.MapEnum<Role>();
+            builder.MapEnum<OrderStatus>();
             optionsBuilder.AddInterceptors(new TimeStampInterceptor());
             optionsBuilder.UseNpgsql(builder.Build()).UseSnakeCaseNamingConvention();
         }
@@ -37,6 +37,7 @@ namespace WebApi.WebApi.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
+            modelBuilder.HasPostgresEnum<OrderStatus>();
             modelBuilder.Entity<User>().HasIndex(u=>u.Email).IsUnique();
         }
     }

@@ -31,23 +31,10 @@ namespace WebApi.WebApi.src.RepoImplementations
 
         public async Task<IEnumerable<T>> GetAll(QueryOptions queryOptions)
         {
-            /* not the right logic yet */
-           /*  if(typeof(T) == typeof(User))
-            {
-                
-            }
-            else if(typeof(T) == typeof(Product))
-            {
-
-            }
-            else if (typeof(T) == typeof(Order))
-            {
-
-            } */
-           return await _dbSet.ToArrayAsync();
+            return await _dbSet.AsNoTracking().ToArrayAsync();
         }
 
-        public async Task<T?> GetOneById(Guid id)
+        public virtual async Task<T?> GetOneById(Guid id)
         {
             return await _dbSet.FindAsync(id);
             
