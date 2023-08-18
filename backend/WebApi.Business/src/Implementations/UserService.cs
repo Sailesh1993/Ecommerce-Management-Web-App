@@ -38,6 +38,19 @@ namespace WebApi.Business.src.Implementations
             return _mapper.Map<UserReadDto>(created);      
         }
 
+        public override async Task<UserReadDto> UpdateOneById(Guid id, UserUpdateDto dto)
+        {
+            var foundUser = await _userRepo.GetOneById(id);
+            if (foundUser == null)
+            {
+                throw new Exception("User not found");
+            }
+            foundUser.Address = dto.Address;
+            foundUser.PhoneNumber = dto.PhoneNumber;
+            var updated = await _userRepo.UpdateOneById(foundUser);
+            return _mapper.Map<UserReadDto>(updated); 
+        }
+
         public async Task<UserReadDto> CreateAdmin(UserCreateDto userCreate)
         {
             var entity = _mapper.Map<User>(userCreate);
