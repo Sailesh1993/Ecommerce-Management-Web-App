@@ -26,7 +26,15 @@ builder.Services
 .AddScoped<IProductRepo, ProductRepo>()
 .AddScoped<IProductService, ProductService>()
 .AddScoped<ICategoryRepo, CategoryRepo>()
-.AddScoped<ICategoryService, CategoryService>();
+.AddScoped<ICategoryService, CategoryService>()
+.AddScoped<IOrderRepo, OrderRepo>()
+.AddScoped<IOrderService, OrderService>()
+.AddScoped<IOrderProductRepo, OrderProductRepo>()
+.AddScoped<IOrderProductService, OrderProductService>()
+.AddScoped<ICartRepo, CartRepo>()
+.AddScoped<ICartService, CartService>()
+.AddScoped<ICartItemRepo, CartItemRepo>()
+.AddScoped<ICartItemService, CartItemService>();
 
 // Add services to the container.
 

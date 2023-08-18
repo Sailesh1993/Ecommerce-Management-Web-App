@@ -21,6 +21,23 @@ namespace WebApi.WebApi.src.Configuration
             CreateMap<CategoryReadDto, Category>();
             CreateMap<CategoryUpdateDto, Category>();
             CreateMap<CategoryCreateDto, Category>();
+
+            CreateMap<Order,OrderReadDto>();
+            CreateMap<OrderUpdateDto, Order>();
+            CreateMap<OrderCreateDTo, Order>();
+
+            CreateMap<OrderProduct, OrderProductReadDto>();
+            CreateMap<OrderProductUpdateDto, OrderProduct>();
+            CreateMap<OrderProductCreateDto, OrderProduct>();
+            
+            CreateMap<Cart, CartReadDto>();
+            CreateMap<CartUpdateDto, Cart>();
+            CreateMap<CartCreateDto, Cart>();
+
+            CreateMap<CartItem, CartItemReadDto>();
+            CreateMap<CartUpdateDto, Cart>();
+            CreateMap<CartItemCreateDto, CartItem>();
+
         }
     }
 }
