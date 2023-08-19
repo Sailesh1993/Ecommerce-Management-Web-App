@@ -46,6 +46,9 @@ namespace WebApi.Business.src.Implementations
                 throw new Exception("User not found");
             }
             foundUser.Address = dto.Address;
+            foundUser.Address = dto.City;
+            foundUser.City = dto.PostalCode;
+            foundUser.City = dto.Country;
             foundUser.PhoneNumber = dto.PhoneNumber;
             var updated = await _userRepo.UpdateOneById(foundUser);
             return _mapper.Map<UserReadDto>(updated); 

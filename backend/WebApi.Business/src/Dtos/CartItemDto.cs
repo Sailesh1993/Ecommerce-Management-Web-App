@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.Configuration.Annotations;
 
 namespace WebApi.Business.src.Dtos
 {
@@ -12,7 +13,7 @@ namespace WebApi.Business.src.Dtos
 
     public class CartItemCreateDto
     {
-    public int Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 
     public class CartItemUpdateDto

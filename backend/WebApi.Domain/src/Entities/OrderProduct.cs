@@ -5,11 +5,15 @@ namespace WebApi.Domain.src.Entities
 {
     public class OrderProduct : BaseEntity
     {
-        [Required]
+        [ForeignKey(nameof(Order))]
         public Guid OrderId { get; set; }
-        [ForeignKey("OrderId")] // Foreign key attribute
-        public virtual Order Order { get; set; }
+        public Order Order { get; set; }
+
+        [ForeignKey("ProductId")] 
         public Guid ProductId { get; set; }
+        public Product Product { get; set; }
+        
+        
         public int Quantity { get; set; }
     }
 }

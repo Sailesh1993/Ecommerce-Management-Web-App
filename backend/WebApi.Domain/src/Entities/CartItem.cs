@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,12 +5,17 @@ namespace WebApi.Domain.src.Entities
 {
     public class CartItem : BaseEntity
     {
-        [Required]
+       [ForeignKey(nameof(Cart))] // Foreign key attribute
         public Guid CartId { get; set; }
+        public Cart Cart { get; set; }
 
-        [ForeignKey("CartId")] // Foreign key attribute
-        public virtual Cart Cart { get; set; }
+        [ForeignKey(nameof(Product))]
         public Guid ProductId { get; set; }
+        public Product Product { get; set; }
+        
         public int Quantity { get; set; }
+
+        
+        
     }
 }

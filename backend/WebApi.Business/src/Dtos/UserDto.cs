@@ -5,6 +5,7 @@ namespace WebApi.Business.src.Dtos
     public class UserReadDto 
     {
         public string Username { get; set; }
+        public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
@@ -34,8 +35,7 @@ namespace WebApi.Business.src.Dtos
     }
     public class UserUpdateDto
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        
         public string Avatar { get; set; }
         public string Address { get; set; }
         public  string City { get; set; }
