@@ -5,25 +5,22 @@ namespace WebApi.Business.src.Dtos
 {
     public class CartReadDto
     {
-        public Decimal TotalAmount { get; set; }
+        public Decimal? TotalAmount { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<CartItem>? CartItem { get; set; }
+        public List<CartItemReadDto> CartItem { get; set; }
+
     }
 
     public class CartCreateDto
     {
-        public Decimal TotalAmount { get; set; }
-        public bool IsActive { get; set; }
-        public Guid UserId { get; set; }
-        public ICollection<CartItem>? CartItem { get; set; }
-        
+        public CartItemCreateDto CartItem { get; set; }
+        public Guid? UserId { get; set; }
     }
 
     public class CartUpdateDto
     {
-        public Decimal TotalAmount { get; set; }
-        public bool IsActive { get; set; }
-        
+        public Guid CartId{ get; set; }
+        public CartItem CartItem { get; set;}
     }
 
     

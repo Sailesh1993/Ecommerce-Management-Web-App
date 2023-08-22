@@ -42,10 +42,9 @@ namespace WebApi.Controller.src.Controllers
 
         [HttpPatch("{id:Guid}")]
         public virtual async Task<ActionResult<TReadDto>> UpdateOneById(
-            [FromRoute] Guid id, [FromBody] TUpdateDto update)
+            [FromRoute] Guid id, [FromBody] TUpdateDto updateDto)
         {
-            var updatedObject = await _baseService.UpdateOneById(id, update);
-            return Ok(updatedObject);
+            return await _baseService.UpdateOneById(id, updateDto);
         }
 
         [HttpDelete("{id:Guid}")]

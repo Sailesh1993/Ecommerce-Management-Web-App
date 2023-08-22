@@ -12,7 +12,7 @@ namespace WebApi.Domain.src.Entities
         [ForeignKey(nameof(Product))]
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
-        
+        public bool IsActive { get; set; }        
         public int Quantity { get; set; }
 
         

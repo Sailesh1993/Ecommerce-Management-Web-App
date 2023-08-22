@@ -1,6 +1,6 @@
-using System.ComponentModel;
 using AutoMapper;
 using WebApi.Business.src.Abstractions;
+using WebApi.Business.src.Common;
 using WebApi.Domain.src.Abstractions;
 using WebApi.Domain.src.Shared;
 
@@ -24,36 +24,88 @@ namespace WebApi.Business.src.Implementations
                 _baseRepo.DeleteOneByID(foundItem);
                 return true;
             }
-            return false;
+            throw CustomErrorHandler.NotFoundException();
         }
 
         public async Task<IEnumerable<TReadDto>> GetAll(QueryOptions queryOptions)
         {
-            var allList= await _baseRepo.GetAll(queryOptions);
-            var mappedList =   _mapper.Map<IEnumerable<TReadDto>>(allList);
-            return mappedList;
+            try
+            {
+                var allLists= await _baseRepo.GetAll(queryOptions);
+                var dtoAllLists = _mapper.Map<IEnumerable<TReadDto>>(allLists); 
+
+                if(dtoAllLists.Any())
+                {
+                    return dtoAllLists;
+                }
+                else
+                {
+                    throw CustomErrorHandler.NotFoundException("There is no item in the Repo");
+                }
+            }
+            catch (System.Exception)
+            {
+                
+                throw CustomErrorHandler.NotFoundException();
+            }
+            
+            
         }
 
         public virtual async Task<TReadDto> GetOneById(Guid id)
         {
-            return _mapper.Map<TReadDto>(await _baseRepo.GetOneById(id));
+            try
+            {
+                var entity = _mapper.Map<TReadDto>(await _baseRepo.GetOneById(id));
+                if(entity is not null)
+                {
+                    return entity;
+                }
+                else
+                {
+                    throw new Exception($"item with{id} id not found");
+                }
+            }
+            catch (System.Exception)
+            {
+                
+                throw CustomErrorHandler.NotFoundException();
+            }
         }
 
         public virtual async Task<TReadDto> UpdateOneById(Guid id, TUpdateDto updated)
         {
-            // var foundItem = await _baseRepo.GetOneById(id);
-            // if(foundItem is null)
-            // {
-            //     throw new Exception("Item not found");
-            // }
-            var updatedEntity = await _baseRepo.UpdateOneById(_mapper.Map<T>(updated));
-            return _mapper.Map<TReadDto>(updatedEntity);
+            try
+            {
+                var foundItem = await _baseRepo.GetOneById(id);
+                if(foundItem == null)
+                {
+                   throw new Exception($"Item with {id} not found");
+                }
+                _mapper.Map(updated, foundItem);
+                await _baseRepo.UpdateOneById(foundItem);
+                return _mapper.Map<TReadDto>(foundItem);
+            }
+            catch (System.Exception)
+            {
+                
+                throw CustomErrorHandler.NotFoundException();
+            }
         }
 
-        public virtual async Task<TReadDto> CreateOne(TCreateDto dto)
+        public virtual async Task<TReadDto> CreateOne(TCreateDto createDto)
         {
-            var entity = await _baseRepo.CreateOne(_mapper.Map<T>(dto));
-            return _mapper.Map<TReadDto>(entity);
+            try
+            {
+                var entity = await _baseRepo.CreateOne(_mapper.Map<T>(createDto));
+                return _mapper.Map<TReadDto>(entity);
+            }
+            catch (Exception ex)
+            {
+                
+                throw CustomErrorHandler.CreateEntityException();
+            }
+            
         }
     }
 }

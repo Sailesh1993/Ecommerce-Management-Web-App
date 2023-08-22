@@ -10,9 +10,7 @@ namespace WebApi.Domain.src.Entities
         [ForeignKey(nameof(UserId))]
         public Guid UserId { get; set; }
         public User User{ get; set; }
-
-        public Decimal TotalAmount { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<CartItem> CartItem { get; set; }
+        public List<CartItem> CartItem { get; set; }
     }
 }

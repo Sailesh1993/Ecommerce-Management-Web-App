@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
@@ -10,9 +11,40 @@ namespace WebApi.Controller.src.Controllers
     public class UserController: BaseController<User, UserReadDto, UserCreateDto, UserUpdateDto>
     {
         private readonly IUserService _userService;
-        public UserController(IUserService baseService) : base(baseService)
+        private readonly IMapper _mapper;
+        public UserController(IUserService baseService, IMapper mapper) : base(baseService)
         {
             _userService = baseService;   
+            _mapper = mapper;
+        }
+
+        [HttpPost("password")]
+        public async Task<ActionResult<UserReadDto>> UpdatePassword(
+            Guid id, [FromBody] PasswordUpdateDto passwordUpdateDto
+        )
+        {
+            try
+            {
+                var updatedUser = await _userService.UpdatePassword(id, passwordUpdateDto.Password);
+                if(updatedUser == null)
+                {
+                    return NotFound($"User with Id {id} not found" );
+                }
+                var userReadDto = _mapper.Map<UserReadDto>(updatedUser);
+                return Ok(userReadDto);
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, $"An error occured: {ex.Message}");
+            }
+        }
+        
+        [HttpPost("Admin")]
+        public async Task<ActionResult<UserReadDto>> CreateAdmin([FromBody] UserCreateDto userCreateDro)
+        {
+            var createdObject = await _userService.CreateAdmin(userCreateDro);
+            return CreatedAtAction(nameof(CreateAdmin), createdObject);
         }
 
         [AllowAnonymous]

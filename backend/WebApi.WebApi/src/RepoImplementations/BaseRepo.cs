@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Domain.src.Abstractions;
-using WebApi.Domain.src.Entities;
 using WebApi.Domain.src.Shared;
 using WebApi.WebApi.src.Database;
 
@@ -29,9 +28,22 @@ namespace WebApi.WebApi.src.RepoImplementations
             return true;
         }
 
-        public async Task<IEnumerable<T>> GetAll(QueryOptions queryOptions)
+        public virtual async Task<IEnumerable<T>> GetAll(QueryOptions queryOptions)
         {
-            return await _dbSet.AsNoTracking().ToArrayAsync();
+            /* not the right logic yet */
+/*             if(typeof(T) == typeof(User))
+            {
+                
+            }
+            else if (typeof(T) == typeof(Product))
+            {
+
+            }
+            else if (typeof(T) == typeof(Order))
+            {
+
+            } */
+            return await _dbSet.ToArrayAsync();
         }
 
         public virtual async Task<T?> GetOneById(Guid id)
@@ -40,7 +52,7 @@ namespace WebApi.WebApi.src.RepoImplementations
             
         }
 
-        public async Task<T> UpdateOneById(T updatedEntity)
+        public virtual async Task<T> UpdateOneById(T updatedEntity)
         {
             _dbSet.Update(updatedEntity);
             await _context.SaveChangesAsync();

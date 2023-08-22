@@ -29,6 +29,7 @@ namespace WebApi.Business.src.Implementations
             foundItem.Title = updated.Title;
             foundItem.Description = updated.Description;
             foundItem.Price = updated.Price;
+            foundItem.CategoryId = updated.CategoryId;
 
             var updatedProduct = await _productRepo.UpdateOneById(foundItem);
             return _mapper.Map<ProductReadDto> (updatedProduct);

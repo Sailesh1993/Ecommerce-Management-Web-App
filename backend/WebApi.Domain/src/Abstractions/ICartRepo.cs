@@ -4,6 +4,6 @@ namespace WebApi.Domain.src.Abstractions
 {
     public interface ICartRepo: IBaseRepo<Cart>
     {
-        
+        Task<Cart> GetUserCartDetails(Guid UserId);
     }
 }

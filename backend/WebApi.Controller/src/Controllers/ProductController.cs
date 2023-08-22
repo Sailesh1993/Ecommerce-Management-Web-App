@@ -23,7 +23,7 @@ namespace WebApi.Controller.src.Controllers
         {
             try
             {
-                var productList = await base.GetAll(queryOptions);
+                var productList = await _productService.GetAll(queryOptions);
                 if (productList == null)
                 {
                     return NotFound();
@@ -40,7 +40,7 @@ namespace WebApi.Controller.src.Controllers
         [AllowAnonymous]
         public override async Task<ActionResult<ProductReadDto>> GetOneById([FromRoute] Guid id)
         {
-            var foundProduct = await base.GetOneById(id);
+            var foundProduct = await _productService.GetOneById(id);
             if(foundProduct == null)
             {
                 return NotFound();

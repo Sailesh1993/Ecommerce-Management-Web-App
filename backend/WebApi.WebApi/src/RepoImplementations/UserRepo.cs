@@ -39,5 +39,9 @@ namespace WebApi.WebApi.src.RepoImplementations
             entity.Role = Role.User;
             return base.CreateOne(entity);
         }
+        public override async Task<User> GetOneById(Guid id)
+        {
+            return await _users.FindAsync(id);
+        }
     }
 }
