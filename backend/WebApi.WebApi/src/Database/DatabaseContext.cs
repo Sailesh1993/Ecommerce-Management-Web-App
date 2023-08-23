@@ -39,6 +39,9 @@ namespace WebApi.WebApi.src.Database
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.HasPostgresEnum<OrderStatus>();
             modelBuilder.Entity<User>().HasIndex(u=>u.Email).IsUnique();
+
+            // auto navigation properties
+            //modelBuilder.Entity<OrderProduct>().Navigation(e => e.Product).AutoInclude();
         }
     }
 }

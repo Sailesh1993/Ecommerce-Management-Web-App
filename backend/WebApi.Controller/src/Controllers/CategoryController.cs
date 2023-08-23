@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Dtos;
 using WebApi.Domain.src.Entities;
@@ -11,10 +13,27 @@ namespace WebApi.Controller.src.Controllers
         {
             _categoryService = categoryService;
         }
-        // [AllowAnonymous]
-        // public override async Task<ActionResult<CategoryReadDto>> GetOneById([FromRoute] Guid id)
-        // {
-        //     return Ok(await _categoryService.GetOneById(id));
-        // }
+
+        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
+        {
+            return await base.DeleteOneById(id);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        public override async Task<ActionResult<CategoryReadDto>> UpdateOneById([FromRoute] Guid id, [FromBody] CategoryUpdateDto updateDto)
+        {
+            return await base.UpdateOneById(id, updateDto);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public override async Task<ActionResult<CategoryReadDto>> CreateOne([FromBody] CategoryCreateDto createDto)
+        {
+            return await base.CreateOne(createDto);
+        }
+
+        
      }
 }

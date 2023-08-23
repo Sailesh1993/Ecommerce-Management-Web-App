@@ -14,7 +14,7 @@ namespace WebApi.Domain.src.Entities
         public decimal TotalAmount { get; set; }
         public OrderStatus OrderStatus { get; set; }
 
-        public ICollection<OrderProduct> OrderProducts { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

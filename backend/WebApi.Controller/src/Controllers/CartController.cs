@@ -15,7 +15,7 @@ namespace WebApi.Controller.src.Controllers
         {
             _cartService = cartService;
         }
-
+    
         public override async Task<ActionResult<CartReadDto>> CreateOne(
             [FromBody] CartCreateDto createDto
         )
@@ -31,7 +31,6 @@ namespace WebApi.Controller.src.Controllers
             }
         }
 
-        [AllowAnonymous]
         public override async Task<ActionResult<CartReadDto>> GetOneById([FromRoute] Guid id)
         {
             var cartDetails = await _cartService.GetUserCartDetails(id);
@@ -42,7 +41,6 @@ namespace WebApi.Controller.src.Controllers
             return Ok(cartDetails);
         }
 
-        [AllowAnonymous]
         [HttpDelete("{id:Guid},{userId:Guid}")]
         public async Task<ActionResult<CartReadDto>> DeleteOneById([FromRoute] Guid id, Guid userId)
         {

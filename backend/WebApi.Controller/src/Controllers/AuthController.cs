@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Dtos;
@@ -15,7 +16,8 @@ namespace WebApi.Controller.src.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("login")]
         public async Task<ActionResult<string>> VerifyCredentials([FromBody] UserCredentialsDto credentials)
         {
             return Ok (await _authService.VerifyCredentials(credentials));

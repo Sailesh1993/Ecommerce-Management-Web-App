@@ -18,20 +18,21 @@ namespace WebApi.Controller.src.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost("password")]
-        public async Task<ActionResult<UserReadDto>> UpdatePassword(
-            Guid id, [FromBody] PasswordUpdateDto passwordUpdateDto
+        public async Task<ActionResult<UserReadDto>> UpdatePassword( [FromQuery]
+            Guid userId, [FromBody] PasswordUpdateDto passwordUpdateDto
         )
         {
             try
             {
-                var updatedUser = await _userService.UpdatePassword(id, passwordUpdateDto.Password);
-                if(updatedUser == null)
+                var updateResult = await _userService.UpdatePassword(userId, passwordUpdateDto.Password);
+                if(updateResult == null)
                 {
-                    return NotFound($"User with Id {id} not found" );
+                    return NotFound($"User with Id {userId} not found" );
                 }
-                var userReadDto = _mapper.Map<UserReadDto>(updatedUser);
-                return Ok(userReadDto);
+                var updatedUser = _mapper.Map<UserReadDto>(updateResult);
+                return Ok(updatedUser);
             }
             catch (Exception ex)
             {
@@ -40,20 +41,27 @@ namespace WebApi.Controller.src.Controllers
             }
         }
         
-        [HttpPost("Admin")]
+        [Authorize(Roles = "Admin")]
+        [HttpPost("createAdmin")]
         public async Task<ActionResult<UserReadDto>> CreateAdmin([FromBody] UserCreateDto userCreateDro)
         {
             var createdObject = await _userService.CreateAdmin(userCreateDro);
             return CreatedAtAction(nameof(CreateAdmin), createdObject);
         }
 
-        [AllowAnonymous]
+        [Authorize]
+        public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid Id)
+        {
+            return await base.DeleteOneById(Id);
+        }
+
+        [Authorize]
         public override async Task<ActionResult<IEnumerable<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {    return Ok(await _userService.GetAll(queryOptions));
              
         }
         
-        [AllowAnonymous]
+        [Authorize]
         public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] Guid id)
         {
             return Ok(await _userService.GetOneById(id));

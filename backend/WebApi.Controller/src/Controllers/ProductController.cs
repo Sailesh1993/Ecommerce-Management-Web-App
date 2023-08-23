@@ -18,7 +18,6 @@ namespace WebApi.Controller.src.Controllers
             _mapper = mapper;
         }  
 
-        [AllowAnonymous]
         public override async Task<ActionResult<IEnumerable<ProductReadDto>>> GetAll([FromQuery] QueryOptions queryOptions) 
         {
             try
@@ -36,8 +35,7 @@ namespace WebApi.Controller.src.Controllers
                 return StatusCode(500, "Error while processing request");
             }
         }
-
-        [AllowAnonymous]
+        
         public override async Task<ActionResult<ProductReadDto>> GetOneById([FromRoute] Guid id)
         {
             var foundProduct = await _productService.GetOneById(id);
@@ -48,19 +46,20 @@ namespace WebApi.Controller.src.Controllers
             return Ok(foundProduct);
         }
 
+        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<ProductReadDto>> CreateOne([FromBody] ProductCreateDto createDto)
         {
             var createdProduct = await _productService.CreateOne(createDto);
             return CreatedAtAction(nameof(CreateOne), createdProduct);
         } 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<ProductReadDto>> UpdateOneById([FromRoute] Guid id, [FromBody] ProductUpdateDto updateDto)
         {
             return await _productService.UpdateOneById(id, updateDto);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
         {
             return StatusCode(204, await _productService.DeleteOneByID(id));

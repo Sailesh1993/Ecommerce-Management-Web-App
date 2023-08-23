@@ -22,12 +22,18 @@ namespace WebApi.WebApi.src.Configuration
             CreateMap<CategoryCreateDto, Category>();
 
             CreateMap<Order, OrderReadDto>();
-            CreateMap<OrderUpdateDto, Order>();
             CreateMap<OrderCreateDTo, Order>();
+            CreateMap<OrderUpdateDto, Order>();
+            CreateMap<Order, OrderUpdateDto>();
+            CreateMap<Order, OrderCreateDTo>();
+            CreateMap<OrderReadDto, Order>();
 
             CreateMap<OrderProduct, OrderProductReadDto>();
-            CreateMap<OrderProductUpdateDto, OrderProduct>();
             CreateMap<OrderProductCreateDto, OrderProduct>();
+            CreateMap<OrderProductUpdateDto, OrderProduct>();                      
+            CreateMap<OrderProduct, OrderProductUpdateDto>(); 
+            CreateMap<OrderProduct,OrderProductCreateDto>();
+            CreateMap<OrderProductReadDto,OrderProduct>(); 
 
             CreateMap<Cart, CartReadDto>();
             CreateMap<CartUpdateDto, Cart>();
