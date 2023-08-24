@@ -12,8 +12,7 @@ namespace WebApi.Domain.src.Entities
         [ForeignKey("ProductId")] 
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
-        
-        
+        public decimal ProductPrice { get; set; }
         public int Quantity { get; set; }
     }
 }

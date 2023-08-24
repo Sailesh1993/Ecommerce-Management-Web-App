@@ -17,14 +17,14 @@ namespace WebApi.Controller.src.Controllers
         }
         
         
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id:Guid}/{userId:Guid}")]
          public async Task<ActionResult<IEnumerable<OrderReadDto>>> GetOrdersByUserId([FromQuery] Guid userId)
         {
             return Ok(await _orderService.GetOrdersByUserId(userId));
         }
         
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPatch("{id:Guid}/{orderId:Guid}")]
         public async Task<ActionResult<OrderReadDto>> UpdateOrderStatus([FromQuery] Guid orderID, [FromBody] OrderStatus orderStatus)
         {

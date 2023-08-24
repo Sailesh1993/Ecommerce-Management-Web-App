@@ -42,10 +42,10 @@ namespace WebApi.Controller.src.Controllers
         }
         
         [Authorize(Roles = "Admin")]
-        [HttpPost("createAdmin")]
-        public async Task<ActionResult<UserReadDto>> CreateAdmin([FromBody] UserCreateDto userCreateDro)
+        [HttpPost("admin")]
+        public async Task<ActionResult<UserReadDto>> CreateAdmin([FromBody] UserCreateDto userCreateDto)
         {
-            var createdObject = await _userService.CreateAdmin(userCreateDro);
+            var createdObject = await _userService.CreateAdmin(userCreateDto);
             return CreatedAtAction(nameof(CreateAdmin), createdObject);
         }
 

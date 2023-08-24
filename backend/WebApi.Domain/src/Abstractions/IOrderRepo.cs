@@ -6,5 +6,6 @@ namespace WebApi.Domain.src.Abstractions
     {
         Task<IEnumerable<Order>> GetOrdersByUserId(Guid UserId);
         Task<Order> UpdateOrderStatus(Guid OrderId, OrderStatus orderStatus);
+        Task<Order> GetOrderDetails(Guid OrderId);
     }
 }

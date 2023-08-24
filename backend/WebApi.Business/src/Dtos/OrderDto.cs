@@ -7,7 +7,7 @@ namespace WebApi.Business.src.Dtos
     {
         public string ShippingAddress { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        
+        public decimal TotalAmount { get; set; }
         public List<OrderProductReadDto> OrderProducts { get; set; }
     }
 

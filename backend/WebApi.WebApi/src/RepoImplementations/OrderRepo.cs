@@ -6,13 +6,13 @@ using WebApi.WebApi.src.Database;
 
 namespace WebApi.WebApi.src.RepoImplementations
 {
-    public class OrderRepo: BaseRepo<Order>, IOrderRepo
+    public class OrderRepo : BaseRepo<Order>, IOrderRepo
     {
         private readonly DbSet<Order> _order;
         private readonly DatabaseContext _context;
 
-
-        public OrderRepo(DatabaseContext context) : base(context)
+        public OrderRepo(DatabaseContext context)
+            : base(context)
         {
             _context = context;
             _order = context.Orders;
@@ -24,8 +24,6 @@ namespace WebApi.WebApi.src.RepoImplementations
                 .Include(o => o.OrderProducts) // Include the related OrderProducts
                 .Where(o => o.UserId == userId)
                 .ToListAsync();
-
-            //return await _order.Where(o => o.UserId == userId).ToListAsync();
         }
 
         public async Task<Order> UpdateOrderStatus(Guid orderId, OrderStatus orderStatus)
@@ -40,11 +38,15 @@ namespace WebApi.WebApi.src.RepoImplementations
             return entity;
         }
 
-        public override async Task<Order?> GetOneById(Guid id)
+        public async Task<Order> GetOrderDetails(Guid OrderId)
         {
             try
             {
-                return _order.FirstOrDefault(i => i.Id == id);
+                var orderDetails = _order
+                    .Include(t => t.OrderProducts.Where(op => op.OrderId == OrderId))
+                    .ThenInclude(op => op.Product)
+                    .FirstOrDefault(i => i.Id == OrderId);
+                return orderDetails;
             }
             catch (System.Exception ex)
             {
