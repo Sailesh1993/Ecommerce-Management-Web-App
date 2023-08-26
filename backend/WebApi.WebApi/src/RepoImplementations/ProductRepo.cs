@@ -9,10 +9,12 @@ namespace WebApi.WebApi.src.RepoImplementations
     public class ProductRepo : BaseRepo<Product>, IProductRepo
     {
         private readonly DbSet<Product> _products;
+        private readonly DatabaseContext _context;
 
         public ProductRepo(DatabaseContext dbContext) : base(dbContext)
         {
             _products = dbContext.Products;
+            _context = dbContext;
             
         }
 
@@ -25,24 +27,14 @@ namespace WebApi.WebApi.src.RepoImplementations
         public override async Task<IEnumerable<Product?>> GetAll(QueryOptions queryOptions)
         {
             return await _products.Include(p => p.Category).ToArrayAsync();
-            // var items = _products
-            //     .Include(p => p.Category)
-            //     .Include(p => p.Title)
-            //     .Include(p => p.Description)
-            //     .Include(p => p.Images)
-            //     .Include(p => p.Price)
-            //     .AsEnumerable();
-
-            // if(!string.IsNullOrWhiteSpace(queryOptions.Search))
-            // {
-            //     items = items.Where(x => x.Title.ToLower().Contains(queryOptions.Search.ToLower()));
-            // }
-            // items = items
-            //         .Skip((queryOptions.PageNumber -1) * queryOptions.PerPage)
-            //         .Take(queryOptions.PerPage);
-
-            //         return items.ToList();
         } 
+
+        public override async Task<Product> CreateOne(Product entity)
+        {
+            await _products.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
         
     }
 }

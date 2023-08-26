@@ -46,7 +46,7 @@ namespace WebApi.Controller.src.Controllers
             return Ok(foundProduct);
         }
 
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<ProductReadDto>> CreateOne([FromBody] ProductCreateDto createDto)
         {
             var createdProduct = await _productService.CreateOne(createDto);
