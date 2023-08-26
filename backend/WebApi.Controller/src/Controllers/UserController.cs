@@ -55,13 +55,13 @@ namespace WebApi.Controller.src.Controllers
             return await base.DeleteOneById(Id);
         }
 
-        [Authorize]
+        [Authorize (Roles = "Admin")]
         public override async Task<ActionResult<IEnumerable<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {    return Ok(await _userService.GetAll(queryOptions));
              
         }
         
-        [Authorize]
+        [Authorize(Policy  = "EmailWhiteList")]
         public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] Guid id)
         {
             return Ok(await _userService.GetOneById(id));

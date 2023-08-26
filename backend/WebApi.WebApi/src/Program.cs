@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -71,6 +72,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
     
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EmailWhiteList", policy => policy.RequireClaim(ClaimTypes.Email, "kriss@gmail.com"));
+});
 
 var app = builder.Build();
 
