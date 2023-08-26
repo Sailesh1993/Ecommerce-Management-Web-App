@@ -1,0 +1,23 @@
+### login admin
+POST http://localhost:5031/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "kriss@gmail.com",
+    "password": "kriss111"
+}
+
+### create 1 product
+POST http://localhost:5031/api/v1/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NjI1NSwiZXhwIjoxNjkzMDg2ODU1LCJpYXQiOjE2OTMwODYyNTUsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.XFs3naK7xZBeXGeYILsliO3r1SJQ2GMJohQ7Sf7IVJI
+
+{
+  "title": "pikki",
+  "images": [
+    "pikki"
+  ],
+  "description": "pikki",
+  "price": 20,
+  "categoryId": "59d5dc5c-796e-44d8-8371-c87be4ce46c6"
+}

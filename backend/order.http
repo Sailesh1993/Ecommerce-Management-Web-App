@@ -1,0 +1,19 @@
+### login admin
+POST http://localhost:5031/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "kriss@gmail.com",
+    "password": "kriss111"
+}
+
+### create 1 cart
+POST http://localhost:5031/api/v1/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NzAyNywiZXhwIjoxNjkzMDg3NjI3LCJpYXQiOjE2OTMwODcwMjcsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.Gw8RfdTlqF3w9SBvOTG-vJaMOquvteax0x_EzxfKceM
+
+{
+  "shippingAddress": "ramaiya",
+  "userId": "2941b036-42a6-4c61-aac7-bf925b71e37c",
+  "orderStatus": "Pending"
+}

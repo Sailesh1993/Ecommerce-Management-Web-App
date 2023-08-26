@@ -1,0 +1,77 @@
+### create 1 user
+POST http://localhost:5031/api/v1/users
+Content-Type: application/json
+
+{
+    "username": "dinghowchi",
+    "password": "dinghowchi",
+    "email": "mdng@gmail.com",
+    "firstName": "Sam",
+    "lastName": "Mhettri",
+    "avatar": "cam110",
+    "address": "cristinharju",
+    "city": "Mspoo",
+    "postalCode": "723",
+    "country": "Ming",
+    "phoneNumber": "1235767678"
+}
+
+### create admin
+POST  http://localhost:5031/api/v1/users/admin/
+Content-Type: application/json
+
+{
+  "username": "Krishana",
+  "password": "kriss111",
+  "email": "kriss@gmail.com",
+  "firstName": "Krishna",
+  "lastName": "Dwarika",
+  "avatar": "Narayan",
+  "address": "Baikunth",
+  "city": "Kailash",
+  "postalCode": "01010",
+  "country": "Sagar",
+  "phoneNumber": "28373782"
+}
+### create admin
+POST  http://localhost:5031/api/v1/users/admin
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NjMzMiwiZXhwIjoxNjkzMDg2OTMyLCJpYXQiOjE2OTMwODYzMzIsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.VSVk28t3zkGFWw2FBVDp7M5ljcmLMCBnsDkmhkpvPlQ
+
+{
+  "username": "Radhe",
+  "password": "radhe1234",
+  "email": "radhe@gmail.com",
+  "firstName": "Radha",
+  "lastName": "Kanaiya",
+  "avatar": "Bansi",
+  "address": "Devnagar",
+  "city": "Kailash",
+  "postalCode": "01010",
+  "country": "World",
+  "phoneNumber": "23423"
+}
+### login user
+POST http://localhost:5031/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "mdng@gmail.com",
+    "password": "dinghowchi"
+}
+
+### login admin
+POST http://localhost:5031/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "kriss@gmail.com",
+    "password": "kriss111"
+}
+
+
+
+### get all users
+GET http://localhost:5031/api/v1/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NDAwMCwiZXhwIjoxNjkzMDg0NjAwLCJpYXQiOjE2OTMwODQwMDAsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.D9SR6287vvhXLsmnAzbVYuA7cTu_g2v1-DYE0xBFZaI

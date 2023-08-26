@@ -1,0 +1,21 @@
+### login admin
+POST http://localhost:5031/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "kriss@gmail.com",
+    "password": "kriss111"
+}
+
+### create 1 cart
+POST http://localhost:5031/api/v1/carts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NjcyNCwiZXhwIjoxNjkzMDg3MzI0LCJpYXQiOjE2OTMwODY3MjQsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.Y0Ypnw6csCD61GTiR_fITBVPHdX2aEw2pF_xzH4_iWs
+
+{
+    "cartItem": {
+    "productId": "2941b036-42a6-4c61-aac7-bf925b71e37c",
+    "quantity": 2
+  },
+  "userId": "a3a749c4-1a3c-42cd-b546-136152a845a8"
+}
