@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "username": "dinghowchi",
     "password": "dinghowchi",
-    "email": "mdng@gmail.com",
+    "email": "hkkhj@gmail.com",
     "firstName": "Sam",
     "lastName": "Mhettri",
     "avatar": "cam110",
@@ -69,9 +69,7 @@ Content-Type: application/json
     "password": "kriss111"
 }
 
-
-
 ### get all users
 GET http://localhost:5031/api/v1/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4YTI4NC1iNDUxLTQzZTQtOGU2OS00ZjMyZDcyNjRjMjciLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzA4NDAwMCwiZXhwIjoxNjkzMDg0NjAwLCJpYXQiOjE2OTMwODQwMDAsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.D9SR6287vvhXLsmnAzbVYuA7cTu_g2v1-DYE0xBFZaI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmNGQxYjEwYi01MmM2LTQzMmUtYjE4Zi0xNTc3NDU1YTMwYjIiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImtyaXNzQGdtYWlsLmNvbSIsIm5iZiI6MTY5MzI0NDY0NywiZXhwIjoxNjkzMjQ1MjQ3LCJpYXQiOjE2OTMyNDQ2NDcsImlzcyI6ImVjb21tZXJjZS1iYWNrZW5kIn0.ISmRHlcNsjEctEmFvQab2pCTANOS7iJvTIF8oekdMUg

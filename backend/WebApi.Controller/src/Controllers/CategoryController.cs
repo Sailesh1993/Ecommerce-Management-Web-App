@@ -14,21 +14,19 @@ namespace WebApi.Controller.src.Controllers
             _categoryService = categoryService;
         }
 
-        [Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+        /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid id)
         {
             return await base.DeleteOneById(id);
         }
 
-        [Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+        /* /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<CategoryReadDto>> UpdateOneById([FromRoute] Guid id, [FromBody] CategoryUpdateDto updateDto)
         {
             return await base.UpdateOneById(id, updateDto);
         }
 
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<CategoryReadDto>> CreateOne([FromBody] CategoryCreateDto createDto)
         {
             return await base.CreateOne(createDto);

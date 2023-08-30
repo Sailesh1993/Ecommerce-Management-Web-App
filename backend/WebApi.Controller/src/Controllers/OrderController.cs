@@ -17,45 +17,45 @@ namespace WebApi.Controller.src.Controllers
         }
         
         
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         [HttpGet("{id:Guid}/{userId:Guid}")]
          public async Task<ActionResult<IEnumerable<OrderReadDto>>> GetOrdersByUserId([FromQuery] Guid userId)
         {
             return Ok(await _orderService.GetOrdersByUserId(userId));
         }
         
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         [HttpPatch("{id:Guid}/{orderId:Guid}")]
         public async Task<ActionResult<OrderReadDto>> UpdateOrderStatus([FromQuery] Guid orderID, [FromBody] OrderStatus orderStatus)
         {
             return Ok(await _orderService.UpdateOrderStatus(orderID, orderStatus));
         }
         
-        [Authorize]
+        /* [Authorize] */
         public override async Task<ActionResult<OrderReadDto>> CreateOne([FromBody] OrderCreateDTo createDto)
         {
             return await base.CreateOne(createDto);
         }
 
-        [Authorize]
+        /* [Authorize] */
         public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid Id)
         {
             return await base.DeleteOneById(Id);
         }
 
-        [Authorize (Roles ="Admin")]
+        /* [Authorize (Roles ="Admin")] */
         public override async Task<ActionResult<IEnumerable<OrderReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {
             return await base.GetAll(queryOptions);
         }
 
-        [Authorize (Roles ="Admin")]
+        /* [Authorize (Roles ="Admin")] */
         public override async Task<ActionResult<OrderReadDto>> GetOneById([FromRoute] Guid Id)
         {
             return await base.GetOneById(Id);
         }
 
-        [Authorize]
+        /* [Authorize] */
         public override async Task<ActionResult<OrderReadDto>> UpdateOneById([FromRoute] Guid Id, [FromBody] OrderUpdateDto updateDto)
         {
             return await base.UpdateOneById(Id, updateDto);

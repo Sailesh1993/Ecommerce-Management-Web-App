@@ -1,6 +1,3 @@
-using AutoMapper.Configuration.Annotations;
-using WebApi.Domain.src.Entities;
-
 namespace WebApi.Business.src.Dtos
 {
     public class ProductReadDto
@@ -10,7 +7,7 @@ namespace WebApi.Business.src.Dtos
         public List <string> Images { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public Category Category { get; set; }
+        public CategoryReadDto Category { get; set; }
     }
 
     public class ProductCreateDto

@@ -17,7 +17,7 @@ namespace WebApi.Business.src.Common
         }
 
         public static CustomErrorHandler CreateEntityException(
-            string message = "Anerror occured while creating the entity"
+            string message = "An error occured while creating the entity"
         )
         {
             throw new CustomErrorHandler(400, message);

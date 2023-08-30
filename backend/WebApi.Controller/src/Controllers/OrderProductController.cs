@@ -16,13 +16,13 @@ namespace WebApi.Controller.src.Controllers
             _orderProductService = orderProductService;
         }
 
-        [Authorize(Roles ="Admin")]
+        /* [Authorize(Roles ="Admin")] */
         public override async Task<ActionResult<OrderProductReadDto>> GetOneById(Guid Id)
         {
             return await base.GetOneById(Id);
         }
 
-        [Authorize(Roles ="Admin")]
+        /* [Authorize(Roles ="Admin")] */
         public override async Task<ActionResult<IEnumerable<OrderProductReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {
             return await base.GetAll(queryOptions);

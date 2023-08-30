@@ -30,19 +30,6 @@ namespace WebApi.WebApi.src.RepoImplementations
 
         public virtual async Task<IEnumerable<T>> GetAll(QueryOptions queryOptions)
         {
-            /* not the right logic yet */
-/*             if(typeof(T) == typeof(User))
-            {
-                
-            }
-            else if (typeof(T) == typeof(Product))
-            {
-
-            }
-            else if (typeof(T) == typeof(Order))
-            {
-
-            } */
             return await _dbSet.ToArrayAsync();
         }
 

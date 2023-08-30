@@ -3,8 +3,8 @@ POST http://localhost:5031/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "kriss@gmail.com",
-    "password": "kriss111"
+    "email": "sailesh@mail.com",
+    "password": "sailesh123"
 }
 
 ### create 1 cart

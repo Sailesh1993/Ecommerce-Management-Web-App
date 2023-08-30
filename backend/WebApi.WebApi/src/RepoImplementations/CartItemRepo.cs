@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using WebApi.Controller.src.Controllers;
 using WebApi.Domain.src.Abstractions;
 using WebApi.Domain.src.Entities;
 using WebApi.WebApi.src.Database;

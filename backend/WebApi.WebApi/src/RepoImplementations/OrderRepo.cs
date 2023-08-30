@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApi.Domain.src.Abstractions;
 using WebApi.Domain.src.Entities;
-using WebApi.Domain.src.Shared;
 using WebApi.WebApi.src.Database;
 
 namespace WebApi.WebApi.src.RepoImplementations

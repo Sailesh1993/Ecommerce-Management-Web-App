@@ -32,7 +32,7 @@ namespace WebApi.Controller.src.Controllers
             catch (Exception ex)
             {
                 
-                return StatusCode(500, "Error while processing request");
+                return StatusCode(500, $"Error while processing request :{ex.Message}");
             }
         }
         
@@ -46,14 +46,14 @@ namespace WebApi.Controller.src.Controllers
             return Ok(foundProduct);
         }
 
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<ProductReadDto>> CreateOne([FromBody] ProductCreateDto createDto)
         {
             var createdProduct = await _productService.CreateOne(createDto);
             return CreatedAtAction(nameof(CreateOne), createdProduct);
         } 
 
-        [Authorize(Roles = "Admin")]
+        /* [Authorize(Roles = "Admin")] */
         public override async Task<ActionResult<ProductReadDto>> UpdateOneById([FromRoute] Guid id, [FromBody] ProductUpdateDto updateDto)
         {
             return await _productService.UpdateOneById(id, updateDto);

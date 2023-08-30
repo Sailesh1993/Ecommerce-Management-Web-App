@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Domain.src.Entities
@@ -13,6 +12,8 @@ namespace WebApi.Domain.src.Entities
         [ForeignKey(nameof(Category))]
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
+        public List<CartItem> CartItems { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
         
     }
 }

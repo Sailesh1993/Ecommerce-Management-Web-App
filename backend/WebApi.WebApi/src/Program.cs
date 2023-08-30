@@ -1,23 +1,39 @@
-using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 using Swashbuckle.AspNetCore.Filters;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Implementations;
 using WebApi.Business.src.Shared;
 using WebApi.Domain.src.Abstractions;
+using WebApi.Domain.src.Entities;
+using WebApi.WebApi.Middleware;
 using WebApi.WebApi.src.Database;
 using WebApi.WebApi.src.RepoImplementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("Default");
+var npgsqlBuilder = new NpgsqlDataSourceBuilder(connectionString);
+npgsqlBuilder.MapEnum<Role>();
+npgsqlBuilder.MapEnum<OrderStatus>();
+var modifiedConnectionString = npgsqlBuilder.Build();
+
+builder.Services.AddDbContext<DatabaseContext>(options =>
+{
+    options.AddInterceptors(new TimeStampInterceptor());
+    options.UseNpgsql(modifiedConnectionString)
+           .UseSnakeCaseNamingConvention();
+});
+
 //Add AutoMapper DI
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // Add db context
-builder.Services.AddDbContext<DatabaseContext>();
+// builder.Services.AddDbContext<DatabaseContext>();
 
 // Add services DI
 builder.Services
@@ -38,8 +54,8 @@ builder.Services
 .AddScoped<ICartItemService, CartItemService>();
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => 
@@ -51,6 +67,10 @@ builder.Services.AddSwaggerGen(options =>
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
+
+// Add policy based requirement handler to service
+builder.Services.
+AddSingleton<ErrorHandlerMiddleware>();
 
 //Config route
 builder.Services.Configure<RouteOptions>(options =>
@@ -73,19 +93,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("EmailWhiteList", policy => policy.RequireClaim(ClaimTypes.Email, "kriss@gmail.com"));
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+/* builder.Services.AddCors(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:3000") // React app's URL
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+}); */
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// CORS error
+app.UseCors();
 
 app.UseHttpsRedirection();
 

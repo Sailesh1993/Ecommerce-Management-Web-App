@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.Configuration.Annotations;
-
 namespace WebApi.Business.src.Dtos
 {
     public class CartItemReadDto
