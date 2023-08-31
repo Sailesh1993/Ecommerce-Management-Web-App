@@ -26,7 +26,7 @@ export const fetchAllUser = createAsyncThunk(
     page,perPage
   }: FetchQuery) => {
    try {
-    const result = await axios.get<User[]>(`http://localhost:5031/api/v1/users`)
+    const result = await axios.get<User[]>(`https://saileshecom-app.azurewebsites.net/api/v1/users`)
    } catch (error) {
     
    }
