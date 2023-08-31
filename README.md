@@ -94,4 +94,183 @@ Testing should be done along the development circle, early and regularly.
 
 Unit testing, and optionally integration testing, must be included for both frontend and backend code. Aim for high test coverage and ensure all major functionalities are covered.
 
-## Deployment Link: https://saileshecom-app.azurewebsites.net/swagger/index.html
+# Introduction
+
+This repository contains the code for Sailesh Karki, Fullstack Project.
+- Link to Web Api page. [Api Webpage] (https://saileshecom-app.azurewebsites.net/swagger/index.html)
+
+Endpoints: 
+
+- /api/v1/auth
+
+- /api/v1/carts
+
+- /api/v1/cartitems
+
+- /api/v1/categorys
+
+- /api/v1/orders
+
+- /api/v1/orderproducts
+
+- /api/v1/products
+
+- /api/v1/users
+
+
+## Technologies
+
+- TypeScript
+- C#
+-.Net Core
+- EF Core
+- PostgreSql
+
+## Entity Relationship Diagram
+The is the database schema designed in Lucid app showing 7 tables and their relationship.
+
+[ERD] (https://lucid.app/lucidchart/a11bb4a1-bb02-4def-ac60-6d8369d6f073/edit?page=0_0&invitationId=inv_f63e8a90-761c-49ac-a934-0883cc121c72#)
+
+[App-Design] (https://lucid.app/lucidspark/5de551fb-af72-4962-8385-00955c1fb85a/edit?invitationId=inv_4c26e2c2-99b2-40a3-83f7-d559aa0b590c&page=0_0#)
+
+## Project Structure
+
+````
+
+│   .gitignore
+│   README.md
+├───Planning
+│       ├───ERD.jpeg
+│       ├───Architecture.jpeg
+├───backend
+│   ├───WebApi.Business
+│   │   │   WebApi.Business.csproj
+│   │   │   WebApi.Business.sln
+│   │   │
+│   │   └───src
+│   │       ├───Abstractions
+│   │       │       IAuthService.cs
+│   │       │       IBaseService.cs
+│   │       │       ICartService.cs
+│   │       │       ICartItemService.cs
+│   │       │       ICategoryService.cs
+│   │       │       IOrderProductService.cs
+│   │       │       IOrderService.cs
+│   │       │       IProductService.cs
+│   │       │       IUserService.cs
+│   │       │
+│   │       ├───Common
+│   │       │       CustomErrorHandler.cs
+│   │       │
+│   │       ├───Dtos
+│   │       │       CartDto.cs
+│   │       │       CartItemDto.cs
+│   │       │       CategoryDto.cs
+│   │       │       OrderDto.cs
+│   │       │       OrderProductDto.cs
+│   │       │       PasswordUpdateDto.cs
+│   │       │       ProductDto.cs
+│   │       │       UserDto.cs
+│   │       │
+│   │       ├───Implementation
+│   │       │       BaseService.cs
+│   │       │       CartItemService.cs
+│   │       │       CartService.cs
+│   │       │       OrderProductService.cs
+│   │       │       OrderService.cs
+│   │       │       ProductService.cs
+│   │       │       UserService.cs
+│   │       │
+│   │       └───Shared
+│   │               AuthService.cs
+│   │               PasswordService.cs
+│   │
+│   ├───WebApi.Controller
+│   │   │   WebApi.Controller.csproj
+│   │   │
+│   │   └───src
+│   │       └───Controllers
+│   │               AuthController.cs
+│   │               BaseController.cs
+│   │               CartController.cs
+│   │               CartItemController.cs
+│   │               CategoryController.cs
+│   │               OrderController.cs
+│   │               OrderProductController.cs
+│   │               ProductController.cs
+│   │               UserController.cs
+│   │
+│   ├───WebApi.Core
+│   │   │   WebApi.Core.csproj
+│   │   │   WebApi.Core.sln
+│   │   │
+│   │   └───src
+│   │       ├───Abstractions
+│   │       │       IBaseRepo.cs
+│   │       │       ICartItemRepo.cs
+│   │       │       ICartRepo.cs
+│   │       │       ICategoryRepo.cs
+│   │       │       IOrderProductRepo.cs
+│   │       │       IOrderRepo.cs
+│   │       │       IProductRepo.cs
+│   │       │       IUserRepo.cs
+│   │       │
+│   │       ├───Entities
+│   │       │       BaseEntity.cs
+│   │       │       Cart.cs
+│   │       │       CartItem.cs
+│   │       │       Order.cs
+│   │       │       OrderProduct.cs
+│   │       │       Product.cs
+│   │       │       TimeStamp.cs
+│   │       │       User.cs
+│   │       │
+│   │       └───Shared
+│   │               QueryOptions.cs
+│   │
+│   ├───WebApi.Testing
+│   │   │   Usings.cs
+│   │   │   WebApi.Test.csproj
+│   │   │   WebApi.Test.sln
+│   │   └───src
+│   │       └───Business.Test
+│   │           ├───ProductServiceTest.cs
+│   │           └───UserServiceTest.cs
+│   │
+│   └───WebApi.WebApi
+│       │   appsettings.Development.json
+│       │   appsettings.json
+│       │   appsettings.example.json
+│       │   WebApi.WebApi.csproj
+│       │
+│       ├───Migrations
+│       │       20230816142450_DatabaseCreate.cs
+│       │       20230816142450_DatabaseCreate.Designer.cs
+│       │       DatabaseContextModelSnapshot.cs
+│       │
+│       ├───Properties
+│       │       launchSettings.json
+│       ├───Middleware
+│       │       ErrorHandlerMiddleware.cs
+│       └───src
+│           │   Program.cs
+│           │
+│           ├───Configuration
+│           │       MapperProfile.cs
+│           │
+│           ├───Database
+│           │       DatabaseContext.cs
+│           │       TimeStampInterceptor.cs
+│           │
+│           │
+│           └───RepoImpementations
+│                   BaseRepo.cs
+│                   CartRepo.cs
+│                   CartItemRepo.cs
+│                   CategoryRepo.cs
+│                   OrderProductRepo.cs
+│                   OrderRepo.cs
+│                   ProductRepo.cs
+│                   UserRepo.cs
+└───frontend
+````
