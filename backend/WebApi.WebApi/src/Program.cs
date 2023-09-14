@@ -91,13 +91,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         ValidateIssuerSigningKey = true
     };
     
-    });
+});
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-/* builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
@@ -105,7 +101,9 @@ var app = builder.Build();
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
-}); */
+});
+
+var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();

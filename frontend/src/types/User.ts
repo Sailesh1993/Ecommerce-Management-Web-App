@@ -9,6 +9,7 @@ export interface User{
     avatar : string
     address : string
     city: string
+    country: string
     postalCode: string
     phoneNumber: string
 }
@@ -24,7 +25,6 @@ export interface UserUpdate{
 }
 
 export interface NewUser{
-    id:number
     email: string
     password: string
     firstName : string
@@ -33,6 +33,7 @@ export interface NewUser{
     avatar : string
     address : string
     city: string
+    country: string
     postalCode: string
     phoneNumber: string
 }
