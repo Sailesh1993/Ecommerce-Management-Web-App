@@ -98,6 +98,7 @@ Unit testing, and optionally integration testing, must be included for both fron
 
 This repository contains the code for Sailesh Karki, Fullstack Project.
 - Link to Web Api page. [Api Webpage] (https://saileshecom-app.azurewebsites.net/swagger/index.html)
+- Link to frontend page. [UI page] (https://saileshe-ecom-webshop.netlify.app)
 
 Endpoints: 
 
