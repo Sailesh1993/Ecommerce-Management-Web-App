@@ -2,7 +2,7 @@ namespace WebApi.Business.src.Dtos
 {
     public class ProductReadDto
     {
-        public Guid Id;
+        public Guid Id {get; set;}
         public string Title { get; set; }
         public List <string> Images { get; set; }
         public string Description { get; set; }

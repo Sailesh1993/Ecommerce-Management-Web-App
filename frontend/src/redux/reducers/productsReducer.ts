@@ -1,8 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { NewProduct, Product, ProductUpdate } from "../../types/Product"
-import axios, { Axios, AxiosError } from "axios"
-import { error } from "console"
-import { create } from "domain"
+import axios, { AxiosError } from "axios"
 
 interface ProductReducer {
     loading: boolean
@@ -20,7 +18,7 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async () => {
         try {
-            const result = await axios.get<Product[]>("https://saileshecom-app.azurewebsites.net/api/v1/products")
+            const result = await axios.get<Product[]>("https://saileshecom-app.azurewebsites.net/api/v1/products") 
             return result.data
         }
         catch (e) {
