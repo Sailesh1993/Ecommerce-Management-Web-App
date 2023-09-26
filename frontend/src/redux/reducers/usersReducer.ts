@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { NewUser, User, UserCredential, UserUpdate } from "../../types/User";
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 interface UserReducer {
   users: User[];
