@@ -42,7 +42,7 @@ const SignUp = () => {
                 <Typography variant='body1' gutterBottom>First Name:</Typography>
                 <TextField id="outlined-basic" label="First Name" variant='outlined' type='text'
                     value={firstName} onChange={(e)=> setFirstName(e.target.value)} /><br/>
-                <Typography variant='body1' gutterBottom>First Name:</Typography>
+                <Typography variant='body1' gutterBottom>Last Name:</Typography>
                 <TextField id="outlined-basic" label="Last Name" variant='outlined' type='text'
                     value={lastName} onChange={(e)=> setLastName(e.target.value)} /><br/>
                 <Typography variant='body1' gutterBottom>Email:</Typography>

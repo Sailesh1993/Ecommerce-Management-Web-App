@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Products from './pages/Products'
 import SingleProduct from './pages/SingleProduct'
 import UsersList from './pages/UsersList'
+import Profile from './pages/Profile'
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
             <Route path='/users' element={<UsersList/>} />
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
+            <Route path='/profile' element={<Profile />}/>
+
           </Routes>
         </BrowserRouter>
       </StyledEngineProvider>
