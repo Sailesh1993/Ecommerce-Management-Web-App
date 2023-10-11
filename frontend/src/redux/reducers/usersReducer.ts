@@ -39,15 +39,16 @@ export const authenticate = createAsyncThunk(
   "authentication",
   async (access_token: string) => {
     try {
-      const authentication = await axios.get<User>(
+      const authentication = await axios.post<User>(
         "https://saileshecom-app.azurewebsites.net/api/v1/auth/login",
+        {},
         {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
         }
       );
-      console.log(authentication.data);
+      //console.log(authentication.data);
       return authentication.data;
     } catch (e) {
       const error = e as AxiosError;
@@ -173,7 +174,7 @@ const userSlice = createSlice({
         }
         else {
           state.currentUser = action.payload
-          console.log(state.currentUser)
+          //console.log(state.currentUser)
         }
         state.loading = false
       })

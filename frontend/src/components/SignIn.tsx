@@ -2,7 +2,7 @@ import { useState } from "react"
 import useAppDispatch from "../hooks/useAppDispatch"
 import { useNavigate } from "react-router-dom"
 import { login } from "../redux/reducers/usersReducer"
-import { Box, Button, TextField, Typography } from "@mui/material"
+import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material"
 import SendIcon from '@mui/icons-material/Send';
 
 const SignIn = ()=> {
@@ -11,16 +11,28 @@ const SignIn = ()=> {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        dispatch(login({email, password}))
-        navigate("/profile")
+        setError("")
+        setLoading(true)
+        try {
+            await dispatch(login({email, password}))
+            setLoading(false)
+            navigate("/profile")
+            
+        } catch (error) {
+            setLoading(false)
+            setError("Login failed. Please check your credentials.")
+        }
+        
     }
 
     return(
         <div data-testid="signin">
-            <form onSubmit={e => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <Box sx={{
                     padding: '1rem',
                     display: 'flex',
@@ -33,9 +45,24 @@ const SignIn = ()=> {
                 <TextField id="outlined-basic" label="Email" variant="outlined" type="email" value={email} onChange={(e) => 
                     setEmail(e.target.value)}/><br/>
                 <Typography variant="body1" gutterBottom>Password:</Typography>
-                <TextField id="outlined-basic" label="Password" variant="outlined" type="text" value={password} onChange={(e) => 
-                    setPassword(e.target.value)}/><br/>
-                    <Button variant="contained" type="submit" endIcon={<SendIcon />}>Submit</Button>
+                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" value={password} onChange={(e) => 
+                    setPassword(e.target.value)}/>{loading ? (
+                        <CircularProgress sx={{ mt: 2 }} />
+                      ) : (
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          endIcon={<SendIcon />}
+                          sx={{ mt: 2 }}
+                        >
+                          Submit
+                        </Button>
+                      )}
+                      {error && (
+                        <Typography variant="body2" color="error" sx={{ mt: 2 }}>
+                          {error}
+                        </Typography>
+                      )}
                 </Box>
             </form>
         </div>

@@ -1,10 +1,10 @@
-import React from 'react'
 import useAppSelector from '../hooks/useAppSelector'
 import Navbar from '../components/Navbar'
 import { Box, Typography } from '@mui/material'
 
 const Profile = () => {
     const currentUser = useAppSelector((state) => state.usersReducer.currentUser)
+    //console.log(currentUser)
   return (
     <>
         <Navbar />
