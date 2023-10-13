@@ -16,9 +16,10 @@ namespace WebApi.Controller.src.Controllers
         }
         
         [HttpPost("login")]
-        public async Task<ActionResult<string>> VerifyCredentials([FromBody] UserCredentialsDto credentials)
+        public async Task<ActionResult<AuthResponse>> VerifyCredentials([FromBody] UserCredentialsDto credentials)
         {
-            return Ok (await _authService.VerifyCredentials(credentials));
+            var authResponse = await _authService.VerifyCredentials(credentials);
+            return Ok (authResponse);
         }
     }
 }

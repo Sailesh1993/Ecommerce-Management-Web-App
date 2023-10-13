@@ -16,7 +16,7 @@ namespace WebApi.Business.src.Shared
         {
             _userRepo = userRepo;
         }
-        public async Task<string> VerifyCredentials(UserCredentialsDto credentials)
+        public async Task<AuthResponse> VerifyCredentials(UserCredentialsDto credentials)
         {
             var foundUserByEmail = await _userRepo.FindOneByEmail(credentials.Email) ?? throw new Exception("Email not found");
             var isAuthenticated = PasswordService.VerifyPassword(credentials.Password, foundUserByEmail.Password, foundUserByEmail.Salt);
@@ -24,7 +24,11 @@ namespace WebApi.Business.src.Shared
             {
                 throw new Exception("Credentials do not match");
             }
-            return GenerateToken(foundUserByEmail);
+            string accessToken = GenerateToken(foundUserByEmail);
+            return new AuthResponse
+            {
+                AccessToken = accessToken
+            };
         }
 
         private string GenerateToken(User user)
@@ -44,7 +48,22 @@ namespace WebApi.Business.src.Shared
             };
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
-            return jwtSecurityTokenHandler.WriteToken(token);
+            string tokenValue = new JwtSecurityTokenHandler()
+                .WriteToken(token);
+            return tokenValue;
         }
+
+        /* private string RefreshAccessToken(string refreshToken)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key-is-my-goal-to-secure-everything"));
+
+            
+        } */
+
+        /* public async Task<string> RefreshToken(string refreshToken)
+        {
+            return await GenerateToken(refreshToken);
+        } */
     }
 }

@@ -93,7 +93,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     
 });
 
-builder.Services.AddCors(options =>
+/* builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
@@ -101,13 +101,19 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
-});
+}); */
 
 var app = builder.Build();
 
-app.UseSwagger();
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+/* app.UseSwagger();
 app.UseSwaggerUI();
-
+ */
 // CORS error
 app.UseCors();
 

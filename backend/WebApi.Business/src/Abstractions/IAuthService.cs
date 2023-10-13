@@ -4,6 +4,7 @@ namespace WebApi.Business.src.Abstractions
 {
     public interface IAuthService
     {
-        Task<string> VerifyCredentials(UserCredentialsDto credentials);
+        Task<AuthResponse> VerifyCredentials(UserCredentialsDto credentials);
+        /* Task<string> RefreshToken(string refreshToken); */
     }
 }

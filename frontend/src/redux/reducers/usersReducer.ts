@@ -35,41 +35,34 @@ export const fetchAllUsers = createAsyncThunk(
   }
 );
 
-export const authenticate = createAsyncThunk(
-  "authentication",
+/* export const authenticate = createAsyncThunk(
+  "authenticate",
   async (access_token: string) => {
     try {
-      const authentication = await axios.post<User>(
-        "https://saileshecom-app.azurewebsites.net/api/v1/auth/login",
-        {},
-        {
+      const authentication = await axios.get<User>("https://saileshecom-app.azurewebsites.net/api/v1/auth/",{
           headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
-      );
-      //console.log(authentication.data);
+            Authorization: `Bearer ${access_token}`
+          }
+        })
+      console.log(authentication.data);
       return authentication.data;
     } catch (e) {
       const error = e as AxiosError;
       return error;
     }
   }
-)
+) */
 
 export const login = createAsyncThunk(
   "login",
-  async ({ email, password }: UserCredential, { dispatch }) => {
+  async (credencial: UserCredential, { dispatch }) => {
     try {
-      const result = await axios.post<{ access_token: string }>(
-        "https://saileshecom-app.azurewebsites.net/api/v1/auth/login/",
-        { email, password }
+      const result = await axios.post<{ access_token: string }>("https://saileshecom-app.azurewebsites.net/api/v1/auth/login",credencial
       );
+      console.log("accessToken:" + result.toString())
       localStorage.setItem("token", result.data.access_token);
-      const authentication = await dispatch(
-        authenticate(result.data.access_token)
-      );
-      return authentication.payload as User;
+      /* const authentication = await dispatch(authenticate(result.data.access_token))
+      return authentication.payload as User */
     } catch (e) {
       const error = e as AxiosError;
       return error;
@@ -168,7 +161,7 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.error = "Failed login"
       })
-      .addCase(authenticate.fulfilled, (state, action) => {
+      /* .addCase(authenticate.fulfilled, (state, action) => {
         if(action.payload instanceof AxiosError) {
           state.error = action.payload.message
         }
@@ -183,7 +176,7 @@ const userSlice = createSlice({
       })
       .addCase(authenticate.rejected, (state, action) => {
         state.error = "Failed authentication"
-      })
+      }) */
   }
 })
 
