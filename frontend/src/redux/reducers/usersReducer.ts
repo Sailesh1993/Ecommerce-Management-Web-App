@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 
 interface UserReducer {
   users: User[];
+  isLoggedIn: boolean,
   currentUser?: User;
   loading: boolean;
   error: string;
@@ -11,6 +12,7 @@ interface UserReducer {
 
 const initialState: UserReducer = {
   users: [],
+  isLoggedIn: false,
   loading: false,
   error: "",
 };
@@ -35,37 +37,28 @@ export const fetchAllUsers = createAsyncThunk(
   }
 );
 
-/* export const authenticate = createAsyncThunk(
-  "authenticate",
-  async (access_token: string) => {
-    try {
-      const authentication = await axios.get<User>("https://saileshecom-app.azurewebsites.net/api/v1/auth/",{
-          headers: {
-            Authorization: `Bearer ${access_token}`
-          }
-        })
-      console.log(authentication.data);
-      return authentication.data;
-    } catch (e) {
-      const error = e as AxiosError;
-      return error;
-    }
-  }
-) */
-
 export const login = createAsyncThunk(
   "login",
-  async (credencial: UserCredential, { dispatch }) => {
+  async (credentials: UserCredential, { rejectWithValue }) => {
     try {
-      const result = await axios.post<{ access_token: string }>("https://saileshecom-app.azurewebsites.net/api/v1/auth/login",credencial
-      );
-      console.log("accessToken:" + result.toString())
-      localStorage.setItem("token", result.data.access_token);
-      /* const authentication = await dispatch(authenticate(result.data.access_token))
-      return authentication.payload as User */
+      
+      const response = await axios.post('https://saileshecom-app.azurewebsites.net/api/v1/auth/login', credentials);
+      console.log(response.data)
+      localStorage.setItem("token", response.data);
+
+      const userResponse = await axios.get('https://saileshecom-app.azurewebsites.net/api/v1/auth/profile', {
+        headers: {
+          Authorization: `Bearer ${response.data}`,
+        },
+      })
+      return userResponse.data;
     } catch (e) {
-      const error = e as AxiosError;
-      return error;
+      const error = e as AxiosError
+      if (error.response && error.response.status === 401) {
+       
+        return rejectWithValue("Invalid email or password");
+      }
+      return rejectWithValue(error.message)
     }
   }
 )
@@ -146,37 +139,20 @@ const userSlice = createSlice({
       .addCase(createNewUser.rejected, (state, action) => {
         state.error = "Failed to create new user!" 
       })
-      .addCase(login.fulfilled, (state, action) => {
-        if(action.payload instanceof AxiosError){
-          state.error = action.payload.message
-        }
-        else {
-          state.currentUser = action.payload
-          state.loading = false
-        }
-      })
-      .addCase(login.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.error = "Failed login"
-      })
-      /* .addCase(authenticate.fulfilled, (state, action) => {
-        if(action.payload instanceof AxiosError) {
-          state.error = action.payload.message
-        }
-        else {
-          state.currentUser = action.payload
-          //console.log(state.currentUser)
-        }
-        state.loading = false
-      })
-      .addCase(authenticate.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(authenticate.rejected, (state, action) => {
-        state.error = "Failed authentication"
-      }) */
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = ""
+    })
+    .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = ""
+        state.isLoggedIn = true
+        state.currentUser = action.payload
+    })
+    .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+    })
   }
 })
 

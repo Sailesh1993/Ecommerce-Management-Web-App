@@ -61,9 +61,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => 
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme{
-        Description = "Bearer token authentication",
-        Name = "Authentication",
-        In = ParameterLocation.Header
+        Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
     });
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
@@ -85,15 +85,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = "ecommerce-backend",
+        ValidateLifetime = true,
         ValidateAudience = false,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my-secret-key-is-my-goal-to-secure-everything")),
-        ValidateIssuerSigningKey = true
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"] ?? "backup-my-private-issuer-from-everything-SecretIssuer",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "backup-my-private-secure-from-everything-SecretKey")),
     };
     
 });
 
-/* builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
@@ -101,19 +102,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
-}); */
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-/* app.UseSwagger();
+app.UseSwagger();
 app.UseSwaggerUI();
- */
+
 // CORS error
 app.UseCors();
 

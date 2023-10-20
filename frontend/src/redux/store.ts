@@ -15,6 +15,7 @@ const store = configureStore({
         },
         usersReducer: {
             loading: false,
+            isLoggedIn: false,
             error: "",
             users: []
         },

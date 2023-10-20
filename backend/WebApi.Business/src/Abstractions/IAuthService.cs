@@ -1,10 +1,12 @@
 using WebApi.Business.src.Dtos;
+using WebApi.Domain.src.Entities;
+
 
 namespace WebApi.Business.src.Abstractions
 {
     public interface IAuthService
     {
-        Task<AuthResponse> VerifyCredentials(UserCredentialsDto credentials);
-        /* Task<string> RefreshToken(string refreshToken); */
+        Task<string> VerifyCredentials(UserCredentialsDto credentials);
+        Task<User> AbstractClaims(string token);
     }
 }
