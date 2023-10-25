@@ -7,12 +7,10 @@ import { Box, Button, Typography } from '@mui/material'
 const ProductDetails = () => {
     const navigate = useNavigate()
     const { id } = useParams()
-    //console.log("ID from URL:", id)
     const[product, setProduct] = useState<Product | undefined>()
     const [error, setError] = useState("")
 
     useEffect(() => {
-        console.log(id)
         axios.get(`https://saileshecom-app.azurewebsites.net/api/v1/products/${id}`)
             .then((response) => {
                 (setProduct(response.data))

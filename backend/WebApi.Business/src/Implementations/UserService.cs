@@ -45,10 +45,12 @@ namespace WebApi.Business.src.Implementations
             {
                 throw new Exception("User not found");
             }
+            foundUser.Avatar = dto.Avatar;
+            foundUser.Avatar = dto.Avatar;
             foundUser.Address = dto.Address;
-            foundUser.Address = dto.City;
-            foundUser.City = dto.PostalCode;
-            foundUser.City = dto.Country;
+            foundUser.City = dto.City;
+            foundUser.PostalCode = dto.PostalCode;
+            foundUser.Country = dto.Country;
             foundUser.PhoneNumber = dto.PhoneNumber;
             var updated = await _userRepo.UpdateOneById(foundUser);
             return _mapper.Map<UserReadDto>(updated); 

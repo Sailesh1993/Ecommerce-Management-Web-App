@@ -96,7 +96,7 @@ const productSlice = createSlice({
             })
             .addCase(fetchAllProducts.rejected, (state, action) =>{
                 state.loading = false
-                state.error = "Cannotperform this action, please try again"
+                state.error = "Cannot perform this action, please try again"
             })
             .addCase(fetchAllProducts.fulfilled, (state, action) =>{
                 state.loading = false

@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./reducers/usersReducer";
 import productsReducer from "./reducers/productsReducer";
+import categorysReducer from "./reducers/categorysReducer";
 
 const store = configureStore({
     reducer: {
         usersReducer,
-        productsReducer
+        productsReducer,
+        categorysReducer
     },
     preloadedState: {
         productsReducer: {
@@ -19,6 +21,11 @@ const store = configureStore({
             error: "",
             users: []
         },
+        categorysReducer: {
+            loading:false,
+            error: "",
+            categorys: []
+        }
     }
 })
 

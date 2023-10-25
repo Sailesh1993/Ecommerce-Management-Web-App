@@ -15,7 +15,7 @@ const initialState: UserReducer = {
   isLoggedIn: false,
   loading: false,
   error: "",
-};
+}
 
 interface FetchQuery {
   page: number;
@@ -43,7 +43,6 @@ export const login = createAsyncThunk(
     try {
       
       const response = await axios.post('https://saileshecom-app.azurewebsites.net/api/v1/auth/login', credentials);
-      console.log(response.data)
       localStorage.setItem("token", response.data);
 
       const userResponse = await axios.get('https://saileshecom-app.azurewebsites.net/api/v1/auth/profile', {

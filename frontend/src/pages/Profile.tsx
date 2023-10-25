@@ -4,7 +4,6 @@ import { Box, Typography } from '@mui/material'
 
 const Profile = () => {
     const currentUser = useAppSelector((state) => state.usersReducer.currentUser)
-    //console.log(currentUser)
   return (
     <>
         <Navbar />
