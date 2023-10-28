@@ -5,12 +5,12 @@ import { Category, NewCategory } from "../../types/Category";
 interface CategoryReducer {
     loading: boolean
     error: string
-    categorys: Category []
+    categories: Category []
 }
 const initialState: CategoryReducer = {
     loading: false,
     error: "",
-    categorys: [],
+    categories: [],
 }
 
 export const fetchAllCategories = createAsyncThunk(
@@ -45,14 +45,14 @@ export const createNewCategory = createAsyncThunk(
 )
 
 const categorySlice = createSlice({
-    name: "categorys",
+    name: "categories",
     initialState,
     reducers: {
         cleanUpCategoryReducer: (state) => {
             return initialState
         },
         createNewCategory: (state, action: PayloadAction<Category>) => {
-            state.categorys.push(action.payload)
+            state.categories.push(action.payload)
         }
     },
     extraReducers: (build) => {
@@ -70,7 +70,7 @@ const categorySlice = createSlice({
                     state.error = action.payload
                 }
                 else {
-                    state.categorys = action.payload
+                    state.categories = action.payload
                 }
                 state.loading = false
             })
@@ -78,7 +78,7 @@ const categorySlice = createSlice({
                 if( typeof action.payload ==="string") {
                     state.error = action.payload
                 } else {
-                    state.categorys.push(action.payload)
+                    state.categories.push(action.payload)
                 }
                 state.loading = false
             })

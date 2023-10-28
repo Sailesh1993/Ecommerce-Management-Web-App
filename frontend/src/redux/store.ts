@@ -24,7 +24,7 @@ const store = configureStore({
         categorysReducer: {
             loading:false,
             error: "",
-            categorys: []
+            categories: []
         }
     }
 })

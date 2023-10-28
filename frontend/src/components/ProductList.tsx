@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useAppSelector from '../hooks/useAppSelector'
 import { fetchAllProducts, sortByPrice } from '../redux/reducers/productsReducer'
 import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import { fetchAllCategories } from '../redux/reducers/categorysReducer'
 
 const getFilteredList = (products: Product[], search: string) => {
     return products.filter((product) => 
@@ -17,14 +18,24 @@ const ProductList = () => {
 
     const [sort, setSort] = useState<number>(0)
     const {products, loading, error } = useAppSelector((state) => state.productsReducer)
+    const [category, setCategory] = useState<string>("show all")
     const [search, setSearch] = useState<string>('')
     const filterProducts = getFilteredList(products, search)
     const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
     }
+    const {categories} = useAppSelector((state) =>state.categorysReducer)
+    const categoryList = categories.map((item)=> item.name)
+    categoryList.push("Show all")
+    const handleCategoryClick = (item: string) =>setCategory(item)
+    const productsOfCategory = products.filter((item) =>
+    category === "Show all"
+        ? item : item.category.name === category ? item : null
+    )
 
     useEffect(() => {
         dispatch(fetchAllProducts())
+        dispatch(fetchAllCategories())
     }, [])
 
     const sortByPriceDynamic = () => {
@@ -39,6 +50,19 @@ const ProductList = () => {
             <Button variant='contained'  size="large" onClick={sortByPriceDynamic}>Sort Price
             </Button>
         </div>
+        <Box sx={{ display: "flex", gap: 2, marginBottom: 3, fontSize: 1, overflow: "auto" }}>
+        {categoryList.map((item) => (
+          <Button
+            onClick={() => handleCategoryClick(item)}
+            
+            color="primary"
+            key={item}
+            sx={{ fontSize: 12}}
+          >
+            {item}
+          </Button>
+        ))}
+        </Box>
         <div>
             <Button variant='contained' onClick={() => navigate('/newProduct')}>
                 Create New Product
@@ -48,6 +72,9 @@ const ProductList = () => {
             </Button>
             <Button variant='contained' onClick={() => navigate('/deleteProduct')}>
                 Delete Product
+            </Button>
+            <Button variant='contained' onClick={() => navigate('/newcategory')}>
+                Create New Category
             </Button>
         </div>
         <br/>
