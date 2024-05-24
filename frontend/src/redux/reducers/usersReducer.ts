@@ -3,11 +3,11 @@ import { NewUser, User, UserCredential, UserUpdate } from "../../types/User";
 import axios, { AxiosError } from "axios";
 
 interface UserReducer {
-  users: User[];
+  users: User[],
   isLoggedIn: boolean,
-  currentUser?: User;
-  loading: boolean;
-  error: string;
+  currentUser?: User,
+  loading: boolean,
+  error: string
 }
 
 const initialState: UserReducer = {

@@ -1,10 +1,9 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
+import SignIn from '../components/SignIn'
 
 const Home = () => {
-    const navigate = useNavigate()
+
   return (
     <>
         <Navbar/>
@@ -16,12 +15,9 @@ const Home = () => {
             padding: 10
         }}>
             <Typography variant='h3' gutterBottom sx={{ marginBotton:10}}>
-                Welcome to Ecom-Shop!
+                Welcome to G-SHOP!
             </Typography>
-            <Typography variant='body1' gutterBottom sx={{marginBottom:10}}>
-                Products Available
-            </Typography>
-            <Button variant='contained' onClick={()=> navigate("/products")}>Products</Button>
+            <SignIn/>
         </Box>
     </>
   )

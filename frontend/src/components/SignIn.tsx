@@ -19,15 +19,30 @@ const SignIn = ()=> {
         setError("")
         setLoading(true)
         try {
-            await dispatch(login({email, password}))
-            setLoading(false)
-            navigate("/profile")
+            const resultAction = await dispatch(login({email, password}))
+            if(login.fulfilled.match(resultAction))
+            {
+              setLoading(false)
+              navigate("/profile")
+            }
+            else
+            {
+              if(resultAction.payload)
+              {
+                setError(resultAction.payload as string);
+              }
+              else
+              {
+                setError("Login failed. Please check your credentials.");
+              }
+              setLoading(false);
+            }
+            
             
         } catch (error) {
             setLoading(false)
-            setError("Login failed. Please check your credentials.")
-        }
-        
+            setError("An unexpected error occurred. Please try again.");
+        } 
     }
 
     return(
@@ -42,10 +57,10 @@ const SignIn = ()=> {
                 }}>
                 <Typography variant="h3" gutterBottom>Login</Typography>
                 <Typography variant="body1" gutterBottom>E-Mail:</Typography>
-                <TextField id="outlined-basic" label="Email" variant="outlined" type="email" value={email} onChange={(e) => 
+                <TextField id="email" label="Email" variant="outlined" type="email" value={email} onChange={(e) => 
                     setEmail(e.target.value)}/><br/>
                 <Typography variant="body1" gutterBottom>Password:</Typography>
-                <TextField id="outlined-basic" label="Password" variant="outlined" type="password" value={password} onChange={(e) => 
+                <TextField id="password" label="Password" variant="outlined" type="password" value={password} onChange={(e) => 
                     setPassword(e.target.value)}/>{loading ? (
                         <CircularProgress sx={{ mt: 2 }} />
                       ) : (
