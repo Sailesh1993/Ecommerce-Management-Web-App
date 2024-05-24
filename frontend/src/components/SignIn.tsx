@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { login } from "../redux/reducers/usersReducer"
 import { Box, Button, CircularProgress, TextField, Typography } from "@mui/material"
 import SendIcon from '@mui/icons-material/Send';
+import Navbar from "./Navbar"
 
 const SignIn = ()=> {
     const dispatch = useAppDispatch()
@@ -46,6 +47,9 @@ const SignIn = ()=> {
     }
 
     return(
+      <>
+        <Navbar/>
+      
         <div data-testid="signin">
             <form onSubmit={(e) => handleSubmit(e)}>
                 <Box sx={{
@@ -55,7 +59,7 @@ const SignIn = ()=> {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Typography variant="h3" gutterBottom>Login</Typography>
+                <Typography variant="h5" gutterBottom>Login</Typography>
                 <Typography variant="body1" gutterBottom>E-Mail:</Typography>
                 <TextField id="email" label="Email" variant="outlined" type="email" value={email} onChange={(e) => 
                     setEmail(e.target.value)}/><br/>
@@ -81,6 +85,7 @@ const SignIn = ()=> {
                 </Box>
             </form>
         </div>
+      </>
     )
 }
 

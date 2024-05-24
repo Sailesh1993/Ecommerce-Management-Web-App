@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../types/Product";
 import useAppDispatch from "../hooks/useAppDispatch";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import {
   fetchAllProducts,
@@ -17,13 +17,12 @@ const ProductList = () => {
     dispatch(fetchAllProducts());
     dispatch(fetchAllCategories());
   }, [dispatch]);
-  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(3);
+  const [itemsPerPage] = useState(4);
   const [sort, setSort] = useState<number>(0);
-  const { products, loading } = useAppSelector(
+  const { products} = useAppSelector(
     (state) => state.productsReducer
   );
   useEffect(() => {
@@ -51,7 +50,7 @@ const ProductList = () => {
   }
   const searchDebounce = useDebounce<Product>(filterFunc, productsOfCategory)
   useEffect(() => {
-    setPage(2);
+    setPage(1);
   }, [searchDebounce.search, category])
   const pageCount = Math.ceil(
     searchDebounce.filteredItems.length / itemsPerPage
@@ -98,27 +97,11 @@ const ProductList = () => {
           value={searchDebounce.search}
           onChange={searchDebounce.handleChange}
           sx={{marginBottom: 3}}
-        />
-        <Button variant="contained" size="large" onClick={sortByPriceDynamic}>
+        /> 
+        <Button variant="contained" size="medium" sx={{margin: 2}}onClick={sortByPriceDynamic}>
           Sort Price
         </Button>
       </div>
-      
-      <div>
-        <Button variant="contained" onClick={() => navigate("/newProduct")}>
-          Create New Product
-        </Button>
-        <Button variant="contained" onClick={() => navigate("/updateProduct")}>
-          Update Product
-        </Button>
-        <Button variant="contained" onClick={() => navigate("/deleteProduct")}>
-          Delete Product
-        </Button>
-        <Button variant="contained" onClick={() => navigate("/newcategory")}>
-          Create New Category
-        </Button>
-      </div>
-      <br />
       <Grid container spacing={2}>
         {displayItem.map((product) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>

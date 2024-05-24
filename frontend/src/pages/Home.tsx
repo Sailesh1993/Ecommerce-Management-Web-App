@@ -1,8 +1,10 @@
 import Navbar from '../components/Navbar'
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import SignIn from '../components/SignIn'
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -17,7 +19,6 @@ const Home = () => {
             <Typography variant='h3' gutterBottom sx={{ marginBotton:10}}>
                 Welcome to G-SHOP!
             </Typography>
-            <SignIn/>
         </Box>
     </>
   )

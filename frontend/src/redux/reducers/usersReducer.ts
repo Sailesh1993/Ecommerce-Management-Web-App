@@ -110,6 +110,11 @@ const userSlice = createSlice({
         state.users.sort((a,b) => b.email.localeCompare(a.email))
       }
     },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.currentUser = undefined;
+      localStorage.removeItem("token");
+    },
   },
   extraReducers: (build) => {
     build
@@ -162,6 +167,7 @@ export const
   updateUserReducer,
   emptyUserReducer,
   updateOneUser,
-  sortByEmail
+  sortByEmail,
+  logout
 } = userSlice.actions
 export default usersReducer
