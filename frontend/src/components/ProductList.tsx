@@ -7,15 +7,10 @@ import {
   fetchAllProducts,
   sortByPrice,
 } from "../redux/reducers/productsReducer";
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, Pagination, TextField, Typography } from "@mui/material";
 import { fetchAllCategories } from "../redux/reducers/categorysReducer";
 import useDebounce from "../hooks/useDebounce";
 
-/* const getFilteredList = (products: Product[], search: string) => {
-    return products.filter((product) => 
-        product.title.toLowerCase().includes(search.toLowerCase())
-    )
-} */
 const ProductList = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -26,7 +21,7 @@ const ProductList = () => {
 
   const [page, setPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(24);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [sort, setSort] = useState<number>(0);
   const { products, loading } = useAppSelector(
     (state) => state.productsReducer
@@ -37,11 +32,6 @@ const ProductList = () => {
     }
   }, [page]);
   const [category, setCategory] = useState<string>("show all");
-  /* const [search, setSearch] = useState<string>('')
-    const filterProducts = getFilteredList(products, search)
-    const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
-    } */
   const { categories } = useAppSelector((state) => state.categorysReducer);
   const categoryList = categories.map((item) => item.name);
   categoryList.push("Show all");
@@ -58,24 +48,24 @@ const ProductList = () => {
     return products.filter((item) =>
       item.title.toLowerCase().includes(filter.toLowerCase())
     );
-  };
-  const searchDebounce = useDebounce<Product>(filterFunc, productsOfCategory);
+  }
+  const searchDebounce = useDebounce<Product>(filterFunc, productsOfCategory)
   useEffect(() => {
-    setPage(1);
-  }, [searchDebounce.search, category]);
+    setPage(2);
+  }, [searchDebounce.search, category])
   const pageCount = Math.ceil(
     searchDebounce.filteredItems.length / itemsPerPage
   );
-  const endOffset = itemOffset + itemsPerPage;
-  const displayItem = searchDebounce.filteredItems.slice(itemOffset, endOffset);
+  const endOffset = itemOffset + itemsPerPage
+  const displayItem = searchDebounce.filteredItems.slice(itemOffset, endOffset)
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-  };
+    setPage(value)
+  }
 
   const sortByPriceDynamic = () => {
-    dispatch(sortByPrice(sort));
-    setSort(sort === 0 ? 1 : 0);
-  };
+    dispatch(sortByPrice(sort))
+    setSort(sort === 0 ? 1 : 0)
+  }
   return (
     <div>
       <br />
@@ -101,13 +91,13 @@ const ProductList = () => {
         ))}
       </Box>
         <TextField
-          id="filled-basic"
-          label="Filled"
+          id="search-product"
+          label="Search Product"
           variant="filled"
           type="text"
           value={searchDebounce.search}
-          placeholder="Search Product"
           onChange={searchDebounce.handleChange}
+          sx={{marginBottom: 3}}
         />
         <Button variant="contained" size="large" onClick={sortByPriceDynamic}>
           Sort Price
@@ -131,7 +121,7 @@ const ProductList = () => {
       <br />
       <Grid container spacing={2}>
         {displayItem.map((product) => (
-          <Grid item xs={4} key={product.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
             <Box
               sx={{
                 border: "1px solid lightblue",
@@ -141,19 +131,19 @@ const ProductList = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                height: "400px"
               }}
             >
               <Typography variant="h6" gutterBottom>
                 {product.title}
               </Typography>
               <img
-                width={640 * 0.75}
-                height={640 * 0.75}
-                src={
-                  product.images && product.images.length > 0
-                    ? product.images[0]
-                    : ""
-                }
+                style={{
+                  width: "100%",
+                  height: "200px", 
+                  objectFit: "cover",
+                }}
+                src={product.images && product.images.length > 0 ? product.images[0] : ""}
                 alt={product.title}
               />
               <Typography variant="body1" gutterBottom>
@@ -168,6 +158,9 @@ const ProductList = () => {
           </Grid>
         ))}
       </Grid>
+      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
+        <Pagination count={pageCount} page={page} onChange={handleChange} />
+      </Box>
     </div>
   );
 };
