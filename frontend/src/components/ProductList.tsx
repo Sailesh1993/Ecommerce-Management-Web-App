@@ -9,9 +9,8 @@ import { Box, Button, Container, Grid, Input, Pagination} from "@mui/material";
 import { fetchAllCategories } from "../redux/reducers/categorysReducer";
 import useDebounce from "../hooks/useDebounce";
 import Loading from "../pages/Loading";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp"
 import GridProducts from "./GridProducts";
+import { ArrowDropDown, ArrowDropUp } from "@mui/icons-material";
 
 const ProductList = () => {
   const dispatch = useAppDispatch();
@@ -107,7 +106,7 @@ const ProductList = () => {
         >
           {" "}
           Sort by price{" "}
-          {priceSort ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          {priceSort ? <ArrowDropUp /> : <ArrowDropDown />}
         </Button>
       </Box>
       <Grid
