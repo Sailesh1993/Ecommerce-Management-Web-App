@@ -9,11 +9,12 @@ const ShoppingCartPage = () => {
     const productsInCart = shoppingCart.productsInCart
     if(productsInCart.length === 0) return <CartEmpty />
   return (
+    <>
+    <Navbar />
    <TableContainer component={Paper} sx={{
     padding: '6em 0',
     minHeight: '90vh'
    }}>
-    <Navbar />
     <Table>
         <TableHead>
             <TableRow>
@@ -29,6 +30,8 @@ const ShoppingCartPage = () => {
     </Table>
 
    </TableContainer> 
+    </>
+    
   )
 }
 

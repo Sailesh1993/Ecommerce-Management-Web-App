@@ -1,4 +1,3 @@
-import { useMemo } from "react"
 import useAppDispatch from "../hooks/useAppDispatch"
 import useAppSelector from "../hooks/useAppSelector"
 import { Product } from "../types/Product"
@@ -7,6 +6,7 @@ import ShoppingCart from "../types/ShoppingCart"
 import { addProduct, removeProduct } from "../redux/reducers/shoppingCartReducer"
 import { Button } from "@mui/material"
 import { GridAddIcon, GridRemoveIcon } from "@mui/x-data-grid"
+import { useMemo } from "react"
 
 interface AddInCartProps{
     product: Product
@@ -16,12 +16,13 @@ const AddInCart = ({product} : AddInCartProps) => {
     const shoppingCart = useAppSelector(state => state.shoppingCartReducer)
     const isProductInCart = (shoppingCart: ShoppingCart, product: Product) => 
     shoppingCart.productsInCart.some((item: ProductsInCart) => item.product.title === product.title)
-    const productInCart = useMemo(()=> {
+
+    useMemo(()=> {
         return isProductInCart(shoppingCart, product)
     }, [product, shoppingCart])
 
     const handleProductAddClick = ()=> {
-        dispatch(addProduct)
+        dispatch(addProduct(product))
     }
     
     const handleProductRemoveClick = () =>{
@@ -29,15 +30,13 @@ const AddInCart = ({product} : AddInCartProps) => {
     }
   return (
     <div>
-         <div>
-        <Button onClick={handleProductAddClick}>
-          <GridAddIcon />
-        </Button>
-        <Button onClick={handleProductRemoveClick}>
-            <GridRemoveIcon/>
-        </Button>
-    </div>
-    </div>
+    <Button onClick={handleProductAddClick}>
+      <GridAddIcon />
+    </Button>
+    <Button onClick={handleProductRemoveClick}>
+      <GridRemoveIcon />
+    </Button>
+  </div>
   )
 }
 
