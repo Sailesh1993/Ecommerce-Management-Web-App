@@ -1,4 +1,3 @@
-import React from 'react'
 import useAppSelector from '../hooks/useAppSelector'
 import CartEmpty from '../components/CartEmpty'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
@@ -6,7 +5,7 @@ import Navbar from '../components/Navbar'
 import ShoppingCartRow from '../components/ShoppingCartRow'
 
 const ShoppingCartPage = () => {
-    const shoppingCart = useAppSelector(state => state.cartReducer)
+    const shoppingCart = useAppSelector(state => state.shoppingCartReducer)
     const productsInCart = shoppingCart.productsInCart
     if(productsInCart.length === 0) return <CartEmpty />
   return (

@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { Product } from "../types/Product"
 import { Box, Grid, Link, Paper, Typography } from "@mui/material"
 import {  Link as RouterLink } from "react-router-dom"
+import AddInCart from "./AddInCart"
 
 interface GridProductsProp {
     product: Product
@@ -25,6 +26,7 @@ const GridProducts = ({product}: GridProductsProp) => {
                 </Link>
                 <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                     <Typography variant='h6'color={'#212121'}>{product.price} €</Typography>
+                    <AddInCart product={product} />
                 </Box>
             </Paper>
         )

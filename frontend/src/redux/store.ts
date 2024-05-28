@@ -2,14 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./reducers/usersReducer";
 import productsReducer from "./reducers/productsReducer";
 import categorysReducer from "./reducers/categorysReducer";
-import cartReducer from "./reducers/cartReducer";
+import shoppingCartReducer from "./reducers/shoppingCartReducer";
 
 const store = configureStore({
     reducer: {
         usersReducer,
         productsReducer,
         categorysReducer,
-        cartReducer
+        shoppingCartReducer,
     },
     preloadedState: {
         productsReducer: {
@@ -28,7 +28,7 @@ const store = configureStore({
             error: "",
             categories: []
         },
-        cartReducer: {
+        shoppingCartReducer: {
             id:'',
             creationAt: '',
             updateAt: '',
