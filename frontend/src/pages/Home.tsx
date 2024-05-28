@@ -1,11 +1,7 @@
 import Navbar from '../components/Navbar'
-import { Box, Button, Typography } from '@mui/material'
-import SignIn from '../components/SignIn'
-import { useNavigate } from 'react-router-dom';
+import { Box, Typography } from '@mui/material'
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
     <>
         <Navbar/>

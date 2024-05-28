@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../types/Product";
 import useAppDispatch from "../hooks/useAppDispatch";
-import { Link} from "react-router-dom";
 import useAppSelector from "../hooks/useAppSelector";
 import {
-  fetchAllProducts,
-  sortByPrice,
+  fetchAllProducts, sortProductsByPrice
 } from "../redux/reducers/productsReducer";
-import { Box, Button, Grid, Pagination, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Input, Pagination} from "@mui/material";
 import { fetchAllCategories } from "../redux/reducers/categorysReducer";
 import useDebounce from "../hooks/useDebounce";
+import Loading from "../pages/Loading";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp"
+import GridProducts from "./GridProducts";
 
 const ProductList = () => {
   const dispatch = useAppDispatch();
@@ -21,15 +23,15 @@ const ProductList = () => {
   const [page, setPage] = useState(1);
   const [itemOffset, setItemOffset] = useState(0);
   const [itemsPerPage] = useState(4);
-  const [sort, setSort] = useState<number>(0);
-  const { products} = useAppSelector(
+  const [priceSort, setPriceSort] = useState<boolean>(true);
+  const { products, loading} = useAppSelector(
     (state) => state.productsReducer
   );
   useEffect(() => {
     if (products.length > 0) {
       setItemOffset(((page - 1) * itemsPerPage) % products.length);
     }
-  }, [page]);
+  }, [page, itemsPerPage, products.length]);
   const [category, setCategory] = useState<string>("show all");
   const { categories } = useAppSelector((state) => state.categorysReducer);
   const categoryList = categories.map((item) => item.name);
@@ -60,91 +62,75 @@ const ProductList = () => {
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   }
-
-  const sortByPriceDynamic = () => {
-    dispatch(sortByPrice(sort))
-    setSort(sort === 0 ? 1 : 0)
-  }
+  if(loading) return <Loading />
+  const sortByPriceHandler = () => {
+    priceSort
+      ? dispatch(sortProductsByPrice("asc"))
+      : dispatch(sortProductsByPrice("dsc"))
+    setPriceSort((state) => !state)
+  };
   return (
-    <div>
-      <br />
-      <div>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 2,
-          marginBottom: 3,
-          fontSize: 1,
-          overflow: "auto",
-        }}
-      >
+    <Container
+      maxWidth="lg"
+      sx={{
+        padding: "6em 0",
+        minHeight: "80vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 3, fontSize: 1, overflow: "auto" }}>
         {categoryList.map((item) => (
           <Button
             onClick={() => handleCategoryClick(item)}
+            
             color="primary"
             key={item}
-            sx={{ fontSize: 12 }}
+            sx={{ fontSize: 12}}
           >
             {item}
           </Button>
         ))}
       </Box>
-        <TextField
-          id="search-product"
-          label="Search Product"
-          variant="filled"
-          type="text"
-          value={searchDebounce.search}
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 3 }}>
+        <Input
+        fullWidth
           onChange={searchDebounce.handleChange}
-          sx={{marginBottom: 3}}
-        /> 
-        <Button variant="contained" size="medium" sx={{margin: 2}}onClick={sortByPriceDynamic}>
-          Sort Price
+          value={searchDebounce.search}
+          placeholder="Search Product"
+          sx={{ maxWidth: 950 }}
+        />
+        <Button
+          onClick={sortByPriceHandler}
+          variant="outlined"
+          color="primary"
+        >
+          {" "}
+          Sort by price{" "}
+          {priceSort ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
         </Button>
-      </div>
-      <Grid container spacing={2}>
-        {displayItem.map((product) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-            <Box
-              sx={{
-                border: "1px solid lightblue",
-                borderRadius: "8px",
-                padding: "1rem",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "400px"
-              }}
-            >
-              <Typography variant="h6" gutterBottom>
-                {product.title}
-              </Typography>
-              <img
-                style={{
-                  width: "100%",
-                  height: "200px", 
-                  objectFit: "cover",
-                }}
-                src={product.images && product.images.length > 0 ? product.images[0] : ""}
-                alt={product.title}
-              />
-              <Typography variant="body1" gutterBottom>
-                {product.price} €
-              </Typography>
-              <div>
-                <Link to={`/products/${product.id}`}>
-                  <Button variant="outlined">Details</Button>
-                </Link>
-              </div>
-            </Box>
-          </Grid>
+      </Box>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          marginTop: 8,
+          marginBottom: 4,
+        }}
+      >
+        {displayItem.map((item) => (
+          <GridProducts key={item.id} product={item} />
         ))}
       </Grid>
-      <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
-        <Pagination count={pageCount} page={page} onChange={handleChange} />
-      </Box>
-    </div>
+      <Pagination
+        page={page}
+        count={pageCount}
+        onChange={(e, value) => handleChange(e, value)}
+        sx={{
+          alignSelf: "center",
+        }}
+      />
+    </Container>
   );
 };
 

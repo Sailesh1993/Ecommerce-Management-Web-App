@@ -1,10 +1,10 @@
 import { TableCell, TableRow } from "@mui/material"
 import ProductsInCart from "../types/ProductsInCart"
 
-interface ShoppingCartRow{
+interface ShoppingCartInRow{
     productsInCart: ProductsInCart
 }
-const ShoppingCartRow = ({productsInCart}: ShoppingCartRow) => {
+const ShoppingCartRow = ({productsInCart}: ShoppingCartInRow) => {
   return (
     <TableRow>
         <TableCell>{productsInCart.product.id}</TableCell>

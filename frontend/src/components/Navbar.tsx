@@ -4,7 +4,7 @@ import "../styles/navbar.css";
 import useAppSelector from "../hooks/useAppSelector";
 import useAppDispatch from "../hooks/useAppDispatch";
 import { logout } from "../redux/reducers/usersReducer";
-import SignIn from "./SignIn";
+
 
 const Navbar = () => {
   const { isLoggedIn } = useAppSelector((state) => state.usersReducer);

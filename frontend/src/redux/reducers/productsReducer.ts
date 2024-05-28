@@ -78,17 +78,25 @@ const productSlice = createSlice({
         cleanUpProductReducer: (state) => {
             return initialState
         },
-        sortByPrice: (state, action: PayloadAction<number>) => {
-            const sortedProducts = [...state.products].sort((a,b) => {
-                if(action.payload === 0) {
-                    return a.price - b.price
-                } else {
-                    return b.price - a.price
+        sortProductsByPrice: (state, action: PayloadAction<string>)=>{
+            if(action.payload === "dsc"){
+                state.products.sort((a,b)=> b.price - a.price)
+            }
+            else if(action.payload === "asc"){
+                state.products.sort((a,b)=> a.price - b.price)
+            }
+        },
+        sortProductsByCategory: (state, action: PayloadAction<string>)=>{
+            state.products.sort((a, b) => {
+                if (action.payload === "dsc") {
+                    return a.category.name.localeCompare(b.category.name)
+                }
+                else {
+                    return b.category.name.localeCompare(a.category.name)
                 }
             })
-            state.products = sortedProducts
-        },
-    },
+        }
+    }, 
     extraReducers: (build) => {
         build
             .addCase(fetchAllProducts.pending, (state, action) =>{
@@ -142,7 +150,7 @@ const productsReducer = productSlice.reducer
 export const
 {
     cleanUpProductReducer,
-    sortByPrice
+    sortProductsByPrice,sortProductsByCategory
 } = productSlice.actions
 
 export default productsReducer

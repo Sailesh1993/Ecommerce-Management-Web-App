@@ -8,7 +8,7 @@ const ProductDetails = () => {
     const navigate = useNavigate()
     const { id } = useParams()
     const[product, setProduct] = useState<Product | undefined>()
-    const [error, setError] = useState("")
+    const [, setError] = useState("")
 
     useEffect(() => {
         axios.get(`https://saileshecom-app.azurewebsites.net/api/v1/products/${id}`)
@@ -28,7 +28,7 @@ const ProductDetails = () => {
         justifyContent: 'center'
     }}>
         <Typography variant="h3" gutterBottom>{product?.title}</Typography>
-        <img width={640 * 0.75} height={640 * 0.75} src={product?.images[0]} key={product?.images[0]}/>
+        <img width={640 * 0.75} height={640 * 0.75} src={product?.images[0]} key={product?.images[0]} alt='{product?.title}'/>
         <Typography variant='subtitle1' gutterBottom>{product?.description}</Typography>
         <Typography variant='body2' gutterBottom>{product?.price}</Typography>
         <Button variant="contained" onClick={() => navigate("/products")}>Back</Button>
