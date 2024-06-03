@@ -18,7 +18,7 @@ namespace WebApi.Controller.src.Controllers
             _mapper = mapper;
         }
 
-        /* [Authorize] */
+        [Authorize]
         [HttpPost("password")]
         public async Task<ActionResult<UserReadDto>> UpdatePassword( [FromQuery]
             Guid userId, [FromBody] PasswordUpdateDto passwordUpdateDto
@@ -41,7 +41,7 @@ namespace WebApi.Controller.src.Controllers
             }
         }
         
-        /* [Authorize(Roles = "Admin")] */
+        [Authorize(Roles = "Admin")]
         [HttpPost("admin")]
         public async Task<ActionResult<UserReadDto>> CreateAdmin([FromBody] UserCreateDto userCreateDto)
         {
@@ -49,19 +49,19 @@ namespace WebApi.Controller.src.Controllers
             return CreatedAtAction(nameof(CreateAdmin), createdObject);
         }
 
-        /* [Authorize] */
+        [Authorize]
         public override async Task<ActionResult<bool>> DeleteOneById([FromRoute] Guid Id)
         {
             return await base.DeleteOneById(Id);
         }
 
-        /* [Authorize (Roles = "Admin")] */
+        [Authorize (Roles = "Admin")]
         public override async Task<ActionResult<IEnumerable<UserReadDto>>> GetAll([FromQuery] QueryOptions queryOptions)
         {    return Ok(await _userService.GetAll(queryOptions));
              
         }
         
-        /* [Authorize(Policy  = "EmailWhiteList")] */
+        [Authorize(Policy  = "EmailWhiteList")]
         public override async Task<ActionResult<UserReadDto>> GetOneById([FromRoute] Guid id)
         {
             return Ok(await _userService.GetOneById(id));

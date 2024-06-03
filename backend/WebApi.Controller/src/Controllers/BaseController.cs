@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
 using WebApi.Domain.src.Shared;
@@ -21,7 +22,8 @@ namespace WebApi.Controller.src.Controllers
             var list= (await _baseService.GetAll(queryOptions)).ToArray();
             return Ok(list);
         }
-
+        
+        [Authorize]
         [HttpGet("{id:Guid}")]
         public virtual async Task<ActionResult<TReadDto>> GetOneById([FromRoute] Guid id)
         {
@@ -39,7 +41,7 @@ namespace WebApi.Controller.src.Controllers
             var createdObject = await _baseService.CreateOne(createDto);
             return CreatedAtAction(nameof(CreateOne), createdObject);
         }
-
+        [Authorize]
         [HttpPatch("{id:Guid}")]
         public virtual async Task<ActionResult<TReadDto>> UpdateOneById(
             [FromRoute] Guid id, [FromBody] TUpdateDto updateDto)

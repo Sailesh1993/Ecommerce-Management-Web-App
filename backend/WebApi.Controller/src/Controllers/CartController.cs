@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Business.src.Abstractions;
 using WebApi.Business.src.Dtos;
@@ -5,6 +6,7 @@ using WebApi.Domain.src.Entities;
 
 namespace WebApi.Controller.src.Controllers
 {
+    [Authorize]
     public class CartController : BaseController<Cart, CartReadDto, CartCreateDto, CartUpdateDto>
     {
         private readonly ICartService _cartService;
@@ -30,9 +32,10 @@ namespace WebApi.Controller.src.Controllers
             }
         }
 
-        public override async Task<ActionResult<CartReadDto>> GetOneById([FromRoute] Guid id)
+        [HttpGet("{userId:guid}")]
+        public override async Task<ActionResult<CartReadDto>> GetOneById( Guid userId)
         {
-            var cartDetails = await _cartService.GetUserCartDetails(id);
+            var cartDetails = await _cartService.GetUserCartDetails(userId);
             if (cartDetails == null)
             {
                 return Ok(null);

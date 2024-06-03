@@ -17,7 +17,8 @@ namespace WebApi.Controller.src.Controllers
             _productService = baseService;
             _mapper = mapper;
         }  
-
+        
+        [Authorize]
         public override async Task<ActionResult<IEnumerable<ProductReadDto>>> GetAll([FromQuery] QueryOptions queryOptions) 
         {
             try
@@ -36,6 +37,7 @@ namespace WebApi.Controller.src.Controllers
             }
         }
         
+        [Authorize]
         public override async Task<ActionResult<ProductReadDto>> GetOneById([FromRoute] Guid id)
         {
             var foundProduct = await _productService.GetOneById(id);
@@ -46,14 +48,14 @@ namespace WebApi.Controller.src.Controllers
             return Ok(foundProduct);
         }
 
-        /* [Authorize(Roles = "Admin")] */
+        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<ProductReadDto>> CreateOne([FromBody] ProductCreateDto createDto)
         {
             var createdProduct = await _productService.CreateOne(createDto);
             return CreatedAtAction(nameof(CreateOne), createdProduct);
         } 
 
-        /* [Authorize(Roles = "Admin")] */
+        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<ProductReadDto>> UpdateOneById([FromRoute] Guid id, [FromBody] ProductUpdateDto updateDto)
         {
             return await _productService.UpdateOneById(id, updateDto);

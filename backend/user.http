@@ -52,12 +52,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI3Y2E4Y
   "phoneNumber": "23423"
 }
 ### login user
-POST http://localhost:5031/api/v1/auth/login
+POST http://localhost:5000/api/v1/auth/login
 Content-Type: application/json
 
 {
-    "email": "mdng@gmail.com",
-    "password": "dinghowchi"
+    "email": "ram@gmail.com",
+    "password": "ram123"
 }
 
 ### login admin
@@ -70,6 +70,6 @@ Content-Type: application/json
 }
 
 ### get all users
-GET http://localhost:5031/api/v1/auth/profile
+GET http://localhost:5000/api/v1/auth/profile
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzYjljMTk1MS1kYTg3LTQyODEtYmUwOC1jMDQ2OGQ1OTcwMzYiLCJ1bmlxdWVfbmFtZSI6IlJhamEiLCJmYW1pbHlfbmFtZSI6IlJhamEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy91cmkiOiJqb2huQG1haWwuY29tIiwicm9sZSI6IlVzZXIiLCJlbWFpbCI6InJhamFAZW1haWwuY29tIiwibmJmIjoxNjk3NjQ2MzY1LCJleHAiOjE2OTc2NDY5NjUsImlhdCI6MTY5NzY0NjM2NSwiaXNzIjoiZWNvbW1lcmNlLWJhY2tlbmQifQ.mS09b-Svsh4xZqSjirFgKWZwDm7KBwEYYWoEjrLrmlI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJyYW1AZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJSYW0iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImExZjk4ODlkLWNkMmMtNGFlMy1iZDM0LTMzYTFkNmExOGQ3ZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3N1cm5hbWUiOiJSYW0iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy91cmkiOiJyYW1yYW0iLCJleHAiOjE3MTc0Mjg3MjcsImlzcyI6ImJhY2t1cC1teS1wcml2YXRlLWlzc3Vlci1mcm9tLWV2ZXJ5dGhpbmctU2VjcmV0SXNzdWVyIn0.1ufTAQyv0N--mxEVKZOilTFSWLWUqpoghjq6J9Ha8Xg
