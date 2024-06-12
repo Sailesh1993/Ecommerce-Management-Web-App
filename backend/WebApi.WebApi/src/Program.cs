@@ -32,9 +32,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 //Add AutoMapper DI
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-// Add db context
-// builder.Services.AddDbContext<DatabaseContext>();
-
 // Add services DI
 builder.Services
 .AddScoped<IUserRepo, UserRepo>()
